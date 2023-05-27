@@ -1,0 +1,40 @@
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+
+const BreadCrumbs = () => {
+  const location = useLocation();
+  let currentLink = "";
+  const crumbs = location.pathname
+    .split("/")
+    .filter((crumb) => crumb !== "")
+    .map((crumb) => {
+      currentLink += `/${crumb}`;
+      return (
+        <Link className="bread-item" to={currentLink}>
+          {crumb.charAt(0).toUpperCase() + crumb.slice(1)}
+        </Link>
+      );
+    });
+  function check() {
+    if (crumbs.length !== 0) {
+      document.querySelector(".breadcrumbs").style.display = "block";
+    } else if (crumbs.length === 0) {
+      document.querySelector(".breadcrumbs").style.display = "none";
+    }
+  }
+  useEffect(() => {
+    check();
+  }, [crumbs]);
+  return (
+    <div className="breadcrumbs container">
+      <ul className="bread-list">
+        <Link className="bread-item" to="/">
+          Головна
+        </Link>
+        {crumbs}
+      </ul>
+    </div>
+  );
+};
+
+export default BreadCrumbs;

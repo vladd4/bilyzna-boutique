@@ -1,0 +1,5 @@
+@media screen and (max-width: 450px) {
+  .swiper-pagination-bullet {
+    margin-top: 5px; /* Apply margin-top of 5px */
+  }
+}

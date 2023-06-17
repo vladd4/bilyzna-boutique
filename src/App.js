@@ -16,6 +16,7 @@ import OrderPage from "./Components/OrderPage";
 import LikePage from "./Components/LikePage";
 import BreadCrumbs from "./Components/BreadCrumbs";
 import LogosSlider from "./Components/LogosSlider";
+import WhyUs from "./Components/WhyUs";
 
 async function getData(setProducts) {
   const response = await fetch(
@@ -24,21 +25,30 @@ async function getData(setProducts) {
   const data = await response.json();
   setProducts([...data]);
 }
-
-function hideSearch(setSearchValue) {
-  document.querySelector(".main-search").classList.remove("main-search-show");
-  setSearchValue("");
+async function getPijami(setPijami) {
+  const response = await fetch("http://localhost:8080/pijami");
+  const data = await response.json();
+  setPijami([...data]);
 }
+// function hideSearch(setSearchValue) {
+//   document.querySelector(".main-search").classList.remove("main-search-show");
+//   setSearchValue("");
+// }
 
 function App() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getData(setProducts);
   }, []);
+  const [pijami, setPijami] = useState([]);
+  useEffect(() => {
+    getPijami(setPijami);
+  }, []);
 
   const [searchValue, setSearchValue] = useState("");
   const [cart, setCart] = useState([]);
   const [prod, setProd] = useState([]);
+  const [tovar, setTovar] = useState("Нижня білизна");
 
   return (
     <BrowserRouter>
@@ -49,19 +59,33 @@ function App() {
           setSearchValue={setSearchValue}
         ></Header>
         <BreadCrumbs></BreadCrumbs>
-        <Cart cart={cart}></Cart>
+        <Cart cart={cart} setCart={setCart}></Cart>
         <div
           className="changed-components"
-          onClick={(e) => hideSearch(setSearchValue)}
+          onClick={(e) =>
+            document
+              .querySelector(".changed-components")
+              .addEventListener("click", (e) => {
+                if (
+                  !document.querySelector(".drop-menu-nav").contains(e.target)
+                ) {
+                  document
+                    .querySelector(".drop-menu-nav")
+                    .classList.remove("drop-show");
+                }
+              })
+          }
         >
           <Routes>
             <Route
               path="/"
               element={
                 <>
-                  <Slider></Slider> <CardRow></CardRow>
+                  <Slider></Slider>
+                  <CardRow></CardRow>
                   <StyleBanner></StyleBanner>
                   <LogosSlider></LogosSlider>
+                  <WhyUs></WhyUs>
                 </>
               }
             ></Route>
@@ -77,12 +101,32 @@ function App() {
                     setCart={setCart}
                     setProd={setProd}
                     prod={prod}
+                    tovar={tovar}
+                    setTovar={setTovar}
                   ></ItemsPage>
                 </>
               }
             ></Route>
             <Route
-              path="bilyzna/dress"
+              path="/pijami/*"
+              element={
+                <>
+                  <ItemsPage
+                    products={pijami}
+                    title={"Жіночі піжами"}
+                    setProducts={setPijami}
+                    cart={cart}
+                    setCart={setCart}
+                    setProd={setProd}
+                    prod={prod}
+                    tovar={tovar}
+                    setTovar={setTovar}
+                  ></ItemsPage>
+                </>
+              }
+            ></Route>
+            <Route
+              path={"bilyzna/" + tovar}
               element={
                 <ProductPage
                   prod={prod}
@@ -93,7 +137,7 @@ function App() {
             ></Route>
             <Route
               path="/order"
-              element={<OrderPage cart={cart}></OrderPage>}
+              element={<OrderPage cart={cart} setCart={setCart}></OrderPage>}
             ></Route>
             <Route
               path="/like"

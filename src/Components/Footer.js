@@ -3,27 +3,29 @@ import Face from "../imgs/facebook.png";
 
 const Footer = () => {
   return (
-    <div id="footer">
+    <div
+      id="footer"
+      onClick={(e) => {
+        document.querySelector(".drop-menu-nav").classList.remove("drop-show");
+      }}
+    >
       <div className="container">
         <div className="row" id="foot-ps">
           <div className="col-lg-4">
-            <h1 className="footer-block-h">Про нас</h1>
+            <h1 className="footer-block-h">Загальні питання</h1>
             <div className="foot-wrapper">
-              <p className="footer-block-p">History</p>
-              <p className="footer-block-p">Out Team</p>
-              <p className="footer-block-p">Mission Statement</p>
-              <p className="footer-block-p">Terms & Conditions</p>
-              <p className="footer-block-p">Privacy Policy</p>
+              <p className="footer-block-p">Оплата та доставка</p>
+              <p className="footer-block-p">Подарункові сертифікати</p>
+              <p className="footer-block-p">Умови повернення</p>
+              <p className="footer-block-p">Співпраця</p>
             </div>
           </div>
           <div className="col-lg-4">
-            <h1 className="footer-block-h">Умови та тарифи</h1>
+            <h1 className="footer-block-h">Графік роботи</h1>
             <div className="foot-wrapper">
-              <p className="footer-block-p">News and Stories</p>
-              <p className="footer-block-p">Publications</p>
-              <p className="footer-block-p">Take Action</p>
-              <p className="footer-block-p">Recomendations</p>
-              <p className="footer-block-p">Help</p>
+              <p className="footer-block-p">Пн-Чт: 9:00 - 22:00</p>
+              <p className="footer-block-p">Пт-Сб: 10:00 - 20:00</p>
+              <p className="footer-block-p">Нд: 10:00 - 18:00</p>
             </div>
           </div>
           <div className="col-lg-4">

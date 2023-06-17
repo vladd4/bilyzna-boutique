@@ -6,12 +6,18 @@ const Newsletter = () => {
     console.log(mail, "was send succesfully");
   }
   return (
-    <div className="newsletter-div">
+    <div
+      className="newsletter-div"
+      onClick={(e) => {
+        document.querySelector(".drop-menu-nav").classList.remove("drop-show");
+      }}
+    >
       <div className="news-wrapper">
         <h3 className="news-h">Будь в курсі всіх новинок!</h3>
         <p className="news-p">
           Підпишіться на отримання новин та отримайте 100 грн знижки на першу
-          покупку!
+          покупку! Вся інформація захищена від шахраїв та керується адміном.
+          Детальну інформацію можна знайти <a className="news-link">тут</a>.
         </p>
         <div className="input-div">
           <input
@@ -33,10 +39,6 @@ const Newsletter = () => {
             Підписатись
           </button>
         </div>
-        <p className="news-admin">
-          Вся інформація захищена від шахраїв та керується адміном. Детальну
-          інформацію можна знайти <a className="news-link">тут</a>.
-        </p>
       </div>
     </div>
   );

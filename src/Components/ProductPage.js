@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import Img1 from "../imgs/dress1.jpg";
-import Img2 from "../imgs/dress2.jpg";
+import { useState } from "react";
 import ItemView from "./ItemView";
 
 function showImage(e) {
@@ -10,21 +8,34 @@ function showImage(e) {
   document.querySelector(".App").style.height = "100vh";
   document.querySelector(".App").style.overflowX = "hidden";
 }
-function addToCart(cart, setCart, title, price, img, quantity) {
+function addToCart(cart, setCart, title, price, img, quantity, id) {
+  if (quantity > 1) {
+    let start_price = price;
+    for (let i = 0; i < quantity - 1; i++) {
+      price += start_price;
+    }
+  }
   setCart([
     ...cart,
-    { title: title, img: img, price: price, quantity: quantity },
+    { id: id, title: title, img: img, price: price, quantity: quantity },
   ]);
+
+  for (var i = 0; i < cart.length; i++) {
+    if (id === cart[i].id) {
+      cart[i].quantity += quantity;
+      cart[i].price += price;
+    }
+  }
   document.querySelector(".btn-page").classList.add("btn-page-added");
   document.querySelector(".btn-page").disabled = true;
   console.log(cart);
 }
 const ProductPage = ({ prod, cart, setCart }) => {
-  console.log(prod.title, prod.img, prod.price);
+  //console.log(prod.title, prod.img, prod.price);
   const [quantValue, setQuantValue] = useState(1);
   return (
     <>
-      <div className="product-page container">
+      <div className="product-page container" id={prod.id}>
         <div className="row prod-row">
           <div className="row prod-img-row col-lg-8">
             <img
@@ -84,7 +95,8 @@ const ProductPage = ({ prod, cart, setCart }) => {
                   prod.title,
                   prod.price,
                   prod.img,
-                  quantValue
+                  quantValue,
+                  prod.id
                 )
               }
             >

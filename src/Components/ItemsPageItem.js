@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-
-function setPageInfo(img, title, price, quantity, setProd, prod) {
-  setProd({ title: title, img: img, price: price, quantity: quantity });
+import { useEffect } from "react";
+function setPageInfo(img, title, price, quantity, setProd, prod, id) {
+  setProd({ id: id, title: title, img: img, price: price, quantity: quantity });
   console.log(prod);
 }
 const ItemsPageItem = ({
@@ -14,19 +14,36 @@ const ItemsPageItem = ({
   description,
   setProd,
   prod,
+  tovar,
+  setTovar,
 }) => {
   return (
     <Link
-      to="dress"
-      className={"col-sm-6 col-4 " + size}
+      to={tovar}
+      className={"col-sm-4 col-4 " + size}
       onClick={(e) => {
-        setPageInfo(img, title, price, quantity, setProd, prod);
+        setPageInfo(img, title, price, quantity, setProd, prod, id);
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0;
+        //setTovar(title);
+      }}
+      onMouseOver={() => {
+        setTovar(title);
       }}
     >
       <div
         style={{ backgroundImage: `url(${img})` }}
         className="item-card"
         id={id}
+        onMouseOver={() => {
+          document.querySelector(`#${id}`).style.backgroundImage =
+            "url(https://photos.js.com.pl/photos/mediolano/s3/s3_69512-0-a79b0dae33.jpg)";
+        }}
+        onMouseOut={() => {
+          document.querySelector(
+            `#${id}`
+          ).style.backgroundImage = `url(${img})`;
+        }}
       >
         <p className="item-card-hover">Переглянути</p>
       </div>

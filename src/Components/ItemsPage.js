@@ -1,7 +1,7 @@
 import Block2 from "../imgs/Asset2.png";
 import Block3 from "../imgs/Asset3.png";
 import ItemsPageItem from "./ItemsPageItem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function changeSize(clicked, setClicked) {
   setClicked(!clicked);
@@ -26,6 +26,8 @@ const ItemsPage = ({
   setCart,
   setProd,
   prod,
+  tovar,
+  setTovar,
 }) => {
   const [clicked, setClicked] = useState(false);
   return (
@@ -33,7 +35,19 @@ const ItemsPage = ({
       <div className="row">
         <div className="side-block col-lg-2">
           <div className="side-pants material">
-            <p className="side-top-h">Матеріал</p>
+            <div className="side-wrap">
+              <p className="side-top-h">Матеріал</p>
+              <span
+                className="side-span-close"
+                onClick={(e) => {
+                  document
+                    .querySelector(".side-block")
+                    .classList.remove("side-block-show");
+                }}
+              >
+                x
+              </span>
+            </div>
             <div>
               <input
                 className="radios"
@@ -185,7 +199,7 @@ const ItemsPage = ({
         </div>
         <div className="main-block col-lg-10">
           <div className="main-block-h">
-            <h2>{title}</h2>
+            <h2 className="items-page-h">{title}</h2>
             <div className="filtr-block">
               <div className="filt-text">
                 <li className="nav-item ">
@@ -232,7 +246,7 @@ const ItemsPage = ({
               return (
                 <ItemsPageItem
                   key={item.id}
-                  id={"item-card-" + item.id}
+                  id={"item-" + item.id}
                   title={item.title}
                   description={item.description}
                   price={item.price}
@@ -241,10 +255,26 @@ const ItemsPage = ({
                   size={clicked ? "col-lg-4" : "col-lg-3"}
                   setProd={setProd}
                   prod={prod}
+                  tovar={tovar}
+                  setTovar={setTovar}
                 ></ItemsPageItem>
               );
             })}
           </div>
+        </div>
+      </div>
+      <div className="filtr-down-block">
+        <div className="row">
+          <button
+            className="filt-btn-down"
+            onClick={(e) => {
+              document
+                .querySelector(".side-block")
+                .classList.add("side-block-show");
+            }}
+          >
+            Фільтруй
+          </button>
         </div>
       </div>
     </div>

@@ -15,12 +15,20 @@ import DropMenu from "./DropMenu";
 function showCart() {
   document.querySelector(".cart").classList.add("show-cart");
   document.querySelector(".changed-components").style.opacity = "0.3";
+  document.querySelector(".changed-components").style.pointerEvents = "none";
   document.querySelector(".navbar").style.opacity = "0.3";
+  document.querySelector(".navbar").style.pointerEvents = "none";
   document.querySelector(".newsletter-div").style.opacity = "0.3";
+  document.querySelector(".newsletter-div").style.pointerEvents = "none";
   document.querySelector("#footer").style.opacity = "0.3";
+  document.querySelector("#footer").style.pointerEvents = "none";
   document.querySelector(".banner").style.opacity = "0.3";
+  document.querySelector(".banner").style.pointerEvents = "none";
   document.querySelector(".breadcrumbs").style.opacity = "0.3";
+  document.querySelector(".breadcrumbs").style.pointerEvents = "none";
   document.querySelector(".links-row").style.opacity = "0.3";
+  document.querySelector(".links-row").style.pointerEvents = "none";
+  document.body.style.overflow = "hidden";
 }
 
 function showMenu() {
@@ -59,7 +67,7 @@ const Header = ({ searchValue, setSearchValue }) => {
             <div className="search-div">
               <input
                 className="main-search"
-                placeholder="Пошук..."
+                placeholder="Пошук по каталогу"
                 value={searchValue}
                 onChange={(e) => {
                   setSearchValue(e.target.value);
@@ -117,7 +125,7 @@ const Header = ({ searchValue, setSearchValue }) => {
           Жіночий одяг
         </Link>
 
-        <Link className="nav-link" to="/">
+        <Link className="nav-link" to="/pijami">
           Піжами
         </Link>
         <Link className="nav-link" to="/">

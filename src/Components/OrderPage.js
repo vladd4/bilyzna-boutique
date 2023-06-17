@@ -5,7 +5,7 @@ function nextForm() {
   document.querySelector(".order-second-form").style.display = "flex";
 }
 
-const OrderPage = ({ cart }) => {
+const OrderPage = ({ cart, setCart }) => {
   return (
     <div className="order-page">
       <h1 className="order-h">Мій кошик</h1>
@@ -19,6 +19,8 @@ const OrderPage = ({ cart }) => {
                   img={item.img}
                   price={item.price}
                   quantity={item.quantity}
+                  id={item.id}
+                  setCart={setCart}
                 ></CartItem>
               );
             })}
@@ -53,26 +55,26 @@ const OrderPage = ({ cart }) => {
             <p className="pib">2. Оплата та доставка</p>
             <input
               className="input-order input-name"
-              placeholder="Введіть спосіб оплати*"
+              placeholder="Виберіть спосіб оплати*"
               required
             ></input>
             <input
               className="input-order input-phone"
-              placeholder="Введіть віділення*"
+              placeholder="Введіть місто*"
               required
             ></input>
             <input
               className="input-order input-mail"
-              placeholder="Введіть пошту"
+              placeholder="Введіть пошту*"
             ></input>
             <input
               className="input-order input-phone"
-              placeholder="Введіть віділення*"
+              placeholder="Введіть номер віділення*"
               required
             ></input>
             <input
               className="input-order input-mail"
-              placeholder="Введіть пошту"
+              placeholder="Коментар до замовлення"
             ></input>
             <button className="order-submit-btn">Оформити &rarr;</button>
           </div>

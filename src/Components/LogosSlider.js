@@ -7,7 +7,7 @@ import Slide1 from "../imgs/3.jpg";
 import Slide2 from "../imgs/4.jpg";
 import Slide3 from "../imgs/5.jpg";
 import Slide4 from "../imgs/7.jpg";
-
+import "../LogoSlider.css";
 const LogosSlider = () => {
   return (
     <Swiper

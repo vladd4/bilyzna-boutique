@@ -5,15 +5,24 @@ import Empty from "../imgs/e-cart.png";
 function hideCart() {
   document.querySelector(".cart").classList.remove("show-cart");
   document.querySelector(".changed-components").style.opacity = "1";
+  document.querySelector(".changed-components").style.pointerEvents = "auto";
   document.querySelector(".navbar").style.opacity = "1";
+  document.querySelector(".navbar").style.pointerEvents = "auto";
   document.querySelector(".newsletter-div").style.opacity = "1";
+  document.querySelector(".newsletter-div").style.pointerEvents = "auto";
   document.querySelector("#footer").style.opacity = "1";
+  document.querySelector("#footer").style.pointerEvents = "auto";
   document.querySelector(".banner").style.opacity = "1";
+  document.querySelector(".banner").style.pointerEvents = "auto";
   document.querySelector(".breadcrumbs").style.opacity = "1";
+  document.querySelector(".breadcrumbs").style.pointerEvents = "auto";
   document.querySelector(".links-row").style.opacity = "1";
+  document.querySelector(".links-row").style.pointerEvents = "auto";
+  document.body.style.overflow = "auto";
 }
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, setCart }) => {
+  console.log(cart);
   return (
     <div className="cart">
       <div className="cart-main container">
@@ -26,6 +35,9 @@ const Cart = ({ cart }) => {
                   img={item.img}
                   price={item.price}
                   quantity={item.quantity}
+                  id={item.id}
+                  cart={cart}
+                  setCart={setCart}
                 ></CartItem>
               );
             })

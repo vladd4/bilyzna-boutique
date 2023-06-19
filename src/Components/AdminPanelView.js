@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function addItem(bilyzna, setBilyzna) {
   let art = document.querySelector("#item-art").value;
@@ -73,10 +73,23 @@ async function getBase(setBilyzna) {
   setBilyzna([...data]);
 }
 function delItem(e, setBilyzna) {
-  let art = e.target
-    .closest(".item")
-    .querySelector(".item-articul").textContent;
-  setBilyzna((current) => current.filter((item) => item.article !== art));
+  let id = e.target.closest(".item").id;
+
+  // Send a DELETE request to the backend API
+  fetch(`http://localhost:8080/admin/bra/${id}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (response.ok) {
+        // Update the local state or re-fetch the data if needed
+        setBilyzna((current) => current.filter((item) => item.id !== id));
+      } else {
+        throw new Error("Failed to delete data");
+      }
+    })
+    .catch((error) => {
+      // Handle error conditions
+    });
 }
 function editItem(e, bilyzna) {
   let block = e.target.closest(".item");
@@ -140,6 +153,9 @@ function preventDef(e) {
 }
 const AdminPanelView = ({ tovar, setTovar }) => {
   const [force, forceUpdate] = useState();
+  useEffect(() => {
+    getBase(setTovar);
+  }, []);
   return (
     <div className="bilyzna-block">
       <form
@@ -235,7 +251,7 @@ const AdminPanelView = ({ tovar, setTovar }) => {
       <div id="bilyzna" class="add-item-list">
         {tovar.map((item) => {
           return (
-            <div class="item">
+            <div class="item" id={item.id}>
               <p className="item-articul">{item.article}</p>
               <p>{item.brand}</p>
               <p className="name">{item.name}</p>

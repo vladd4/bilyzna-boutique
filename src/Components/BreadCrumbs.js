@@ -9,8 +9,9 @@ const BreadCrumbs = () => {
     .filter((crumb) => crumb !== "")
     .map((crumb) => {
       currentLink += `/${crumb}`;
-      if (crumb === "bilyzna") crumb = "білизна";
+      if (crumb === "bras") crumb = "бюстгальтери";
       else if (crumb === "order") crumb = "кошик";
+      else if (crumb === "pants") crumb = "трусики";
       return (
         <Link className="bread-item" to={currentLink}>
           {crumb.charAt(0).toUpperCase() + crumb.slice(1)}

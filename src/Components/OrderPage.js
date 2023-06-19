@@ -21,6 +21,7 @@ const OrderPage = ({ cart, setCart }) => {
                   quantity={item.quantity}
                   id={item.id}
                   setCart={setCart}
+                  size={item.size}
                 ></CartItem>
               );
             })}

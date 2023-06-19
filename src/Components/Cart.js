@@ -38,6 +38,7 @@ const Cart = ({ cart, setCart }) => {
                   id={item.id}
                   cart={cart}
                   setCart={setCart}
+                  size={item.size}
                 ></CartItem>
               );
             })

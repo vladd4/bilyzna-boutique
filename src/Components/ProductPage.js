@@ -8,16 +8,30 @@ function showImage(e) {
   document.querySelector(".App").style.height = "100vh";
   document.querySelector(".App").style.overflowX = "hidden";
 }
-function addToCart(cart, setCart, title, price, img, quantity, id) {
+function getSize(buttons) {
+  for (let i = 0; i < buttons.length; i++) {
+    if (buttons[i].disabled) return buttons[i].textContent;
+  }
+}
+function addToCart(cart, setCart, title, price, img, quantity, id, buttons) {
   if (quantity > 1) {
     let start_price = price;
     for (let i = 0; i < quantity - 1; i++) {
       price += start_price;
     }
   }
+  let size = getSize(buttons);
+
   setCart([
     ...cart,
-    { id: id, title: title, img: img, price: price, quantity: quantity },
+    {
+      id: id,
+      title: title,
+      img: img,
+      price: price,
+      quantity: quantity,
+      size: size,
+    },
   ]);
 
   for (var i = 0; i < cart.length; i++) {
@@ -55,9 +69,34 @@ const ProductPage = ({ prod, cart, setCart }) => {
             <h3 className="prod-page-h">{prod.title}</h3>
             <p className="prod-page-art">Артикул: 23574934</p>
             <p className="prod-page-size">
-              Розмір: <button className="size-btn">S</button>
-              <button className="size-btn">M</button>
-              <button className="size-btn">L</button>
+              Розмір:{" "}
+              <button
+                className="size-btn"
+                id="s"
+                onClick={(e) => {
+                  document.querySelector("#s").disabled = true;
+                }}
+              >
+                S
+              </button>
+              <button
+                className="size-btn"
+                id="m"
+                onClick={(e) => {
+                  document.querySelector("#m").disabled = true;
+                }}
+              >
+                M
+              </button>
+              <button
+                className="size-btn"
+                id="l"
+                onClick={(e) => {
+                  document.querySelector("#l").disabled = true;
+                }}
+              >
+                L
+              </button>
             </p>
             <p className="prod-page-price">Ціна: {prod.price} грн.</p>
             <p className="prod-page-price prod-page-quantity">
@@ -96,7 +135,8 @@ const ProductPage = ({ prod, cart, setCart }) => {
                   prod.price,
                   prod.img,
                   quantValue,
-                  prod.id
+                  prod.id,
+                  document.querySelectorAll(".size-btn")
                 )
               }
             >
@@ -115,8 +155,6 @@ const ProductPage = ({ prod, cart, setCart }) => {
               <p className="prod-info-p">
                 Odcień écru jest niezwykle twarzowy, pasuje też na wiele okazji.
               </p>
-              <h5 className="prod-info-h">Розміри: </h5>
-              <p className="prod-info-p">XS, S, M, L, XL, XXL</p>
             </div>
           </div>
         </div>

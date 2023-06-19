@@ -13,10 +13,12 @@ import ToTop from "./Components/ToTop";
 import ProductPage from "./Components/ProductPage";
 import Cart from "./Components/Cart";
 import OrderPage from "./Components/OrderPage";
-import LikePage from "./Components/LikePage";
 import BreadCrumbs from "./Components/BreadCrumbs";
 import LogosSlider from "./Components/LogosSlider";
 import WhyUs from "./Components/WhyUs";
+import AdminPanel from "./Components/AdminPanel";
+import BrasFiltr from "./Components/FiltrComponents/BrasFiltr";
+import PantsFiltr from "./Components/FiltrComponents/PantsFiltr";
 
 async function getData(setProducts) {
   const response = await fetch(
@@ -53,13 +55,20 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Banner></Banner>
-        <Header
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-        ></Header>
-        <BreadCrumbs></BreadCrumbs>
-        <Cart cart={cart} setCart={setCart}></Cart>
+        {window.location.pathname !== "/admin" && (
+          <>
+            <Banner></Banner>
+            <Header
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+            ></Header>
+            <BreadCrumbs></BreadCrumbs>
+            <Cart cart={cart} setCart={setCart}></Cart>
+          </>
+        )}
+        <Routes>
+          <Route path="/admin/*" element={<AdminPanel></AdminPanel>}></Route>
+        </Routes>
         <div
           className="changed-components"
           onClick={(e) =>
@@ -90,12 +99,12 @@ function App() {
               }
             ></Route>
             <Route
-              path="/bilyzna/*"
+              path="/bras/*"
               element={
                 <>
                   <ItemsPage
                     products={products}
-                    title={"Жіноча білизна"}
+                    title={"Бюстгальтери"}
                     setProducts={setProducts}
                     cart={cart}
                     setCart={setCart}
@@ -103,6 +112,26 @@ function App() {
                     prod={prod}
                     tovar={tovar}
                     setTovar={setTovar}
+                    filtr={<BrasFiltr></BrasFiltr>}
+                  ></ItemsPage>
+                </>
+              }
+            ></Route>
+            <Route
+              path="/pants/*"
+              element={
+                <>
+                  <ItemsPage
+                    products={products}
+                    title={"Трусики"}
+                    setProducts={setProducts}
+                    cart={cart}
+                    setCart={setCart}
+                    setProd={setProd}
+                    prod={prod}
+                    tovar={tovar}
+                    setTovar={setTovar}
+                    filtr={<PantsFiltr></PantsFiltr>}
                   ></ItemsPage>
                 </>
               }
@@ -128,26 +157,33 @@ function App() {
             <Route
               path={"bilyzna/" + tovar}
               element={
-                <ProductPage
-                  prod={prod}
-                  cart={cart}
-                  setCart={setCart}
-                ></ProductPage>
+                <>
+                  {" "}
+                  <ProductPage
+                    prod={prod}
+                    cart={cart}
+                    setCart={setCart}
+                  ></ProductPage>
+                </>
               }
             ></Route>
             <Route
               path="/order"
-              element={<OrderPage cart={cart} setCart={setCart}></OrderPage>}
-            ></Route>
-            <Route
-              path="/like"
-              element={<LikePage products={products}></LikePage>}
+              element={
+                <>
+                  <OrderPage cart={cart} setCart={setCart}></OrderPage>
+                </>
+              }
             ></Route>
           </Routes>
         </div>
-        <Newsletter></Newsletter>
+        {window.location.pathname !== "/admin" && (
+          <>
+            <Newsletter></Newsletter>
+            <Footer></Footer>
+          </>
+        )}
         <ToTop></ToTop>
-        <Footer></Footer>
       </div>
     </BrowserRouter>
   );

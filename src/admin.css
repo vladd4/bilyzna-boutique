@@ -1,0 +1,118 @@
+.bilyzna-block {
+  display: grid;
+  place-items: center;
+}
+#add-item-form,
+#edit-item-form {
+  margin-bottom: 20px;
+  width: 50%;
+  display: flex;
+}
+.add-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.items-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3%;
+}
+.items-nav-h {
+  margin-right: 15px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.items-nav-h:hover {
+  opacity: 0.5;
+}
+.item {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #000;
+  padding-bottom: 4px;
+  font-size: 12px;
+}
+.edit-btn {
+  background-color: #fff;
+  color: #000;
+  font-size: 15px;
+  border: 1px solid #000;
+  padding: 0%;
+  cursor: pointer;
+  scale: 1;
+  transition: all 0.3s;
+  height: 50px;
+  font-size: 10px;
+}
+.del-btn {
+  background-color: #fff;
+  color: #000;
+  font-size: 15px;
+  border: 1px solid #000;
+  padding: 0%;
+  font-size: 10px;
+  cursor: pointer;
+  scale: 1;
+  transition: all 0.3s;
+  height: 50px;
+}
+.del-btn:hover {
+  background-color: lavender;
+}
+.edit-btn:hover {
+  background-color: lavender;
+}
+.input-admin[type="text"] {
+  margin-bottom: 10px;
+  padding: 1% 2%;
+  width: 100%;
+}
+.admin-add {
+  margin-top: 10px;
+  background-color: #fff;
+  color: #000;
+  font-size: 17px;
+  border: 1px solid #000;
+  padding: 1% 2%;
+  cursor: pointer;
+  scale: 1;
+  transition: all 0.3s;
+}
+.admin-add:hover {
+  background-color: lavender;
+  transition: all 0.3s;
+}
+form {
+  display: grid;
+  place-items: center;
+}
+.admin-save {
+  margin-top: 10px;
+  background-color: #fff;
+  color: #000;
+  font-size: 17px;
+  border: 1px solid #000;
+  padding: 1% 2%;
+  cursor: pointer;
+  scale: 1;
+  transition: all 0.3s;
+}
+.admin-save:hover {
+  background-color: lavender;
+  transition: all 0.3s;
+}
+.add-item-list {
+  width: 100%;
+  margin-top: 2%;
+}
+.info-div {
+  width: 18%;
+}
+.name {
+  width: 10%;
+}
+.admin-save {
+  display: none;
+}

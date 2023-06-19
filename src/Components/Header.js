@@ -109,10 +109,16 @@ const Header = ({ searchValue, setSearchValue }) => {
             Білизна
           </a>
           <ul className="drop-list">
-            <Link className="drop-list-item" to="/bilyzna">
-              Жіноча білизна
-            </Link>
-            <li className="drop-list-item">Трусики</li>
+            <li className="drop-list-item-li">
+              <Link className="drop-list-item" to="/bras">
+                Бюстгалтери
+              </Link>
+            </li>
+            <li>
+              <Link className="drop-list-item" to="/pants">
+                Трусики
+              </Link>
+            </li>
             <li className="drop-list-item">Піжами</li>
             <li className="drop-list-item">Бюсти</li>
             <li className="drop-list-item">Ночнушки</li>

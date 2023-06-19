@@ -4,13 +4,14 @@ function removeFromCart(setCart, id) {
   setCart((current) => current.filter((cart) => cart.id !== id));
 }
 
-const CartItem = ({ img, title, price, quantity, id, setCart }) => {
+const CartItem = ({ img, title, price, quantity, id, setCart, size }) => {
   return (
     <div className="row cart-main-row" id={id}>
-      <img className="col-lg-3 col-3 cart-img" alt="" src={img}></img>
+      <img className="col-lg-4 col-3 cart-img" alt="" src={img}></img>
       <div className=" col-lg-6 col-6">
         <p className="cart-title">{title}</p>
         <p className="cart-title">Кількість: {quantity} шт.</p>
+        <p className="cart-title">Розмір: {size}</p>
         <p className="cart-price">{price} ₴</p>
       </div>
       <span

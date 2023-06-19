@@ -26,6 +26,22 @@ function addItem(bilyzna, setBilyzna) {
       image2: img2,
     },
   ]);
+  fetch("/admin/bra", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bilyzna),
+  })
+    .then((response) => {
+      if (response.ok) {
+      } else {
+        throw new Error("Failed to insert data");
+      }
+    })
+    .catch((error) => {
+      // Handle error conditions
+    });
   document.querySelector("#item-art").value = "";
   document.querySelector("#item-name").value = "";
   document.querySelector("#item-price").value = "";
@@ -100,11 +116,18 @@ function updateItem(bilyzna, forceUpdate) {
   document.querySelector(".admin-add").style.display = "block";
   document.querySelector(".admin-save").style.display = "none";
 }
+function preventDef(e) {
+  e.preventDefault();
+}
 const AdminPanelView = ({ tovar, setTovar }) => {
   const [force, forceUpdate] = useState();
   return (
     <div className="bilyzna-block">
-      <form action="/admin/bra" method="post">
+      <form
+        onSubmit={(e) => {
+          preventDef(e);
+        }}
+      >
         <div id="add-item-form">
           <div class="add-wrapper row">
             <div className="col-lg-6">

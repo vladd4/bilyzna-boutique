@@ -86,7 +86,7 @@ const ItemsPage = ({
               return (
                 <ItemsPageItem
                   key={item.id}
-                  id={"item-" + item.id}
+                  id={item.id}
                   title={item.title}
                   description={item.description}
                   price={item.price}

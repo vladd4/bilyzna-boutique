@@ -34,14 +34,15 @@ const ItemsPageItem = ({
       <div
         style={{ backgroundImage: `url(${img})` }}
         className="item-card"
-        id={id}
+        id={"item-" + id}
+        data-id={id}
         onMouseOver={() => {
-          document.querySelector(`#${id}`).style.backgroundImage =
+          document.querySelector(`#item-${id}`).style.backgroundImage =
             "url(https://photos.js.com.pl/photos/mediolano/s3/s3_69512-0-a79b0dae33.jpg)";
         }}
         onMouseOut={() => {
           document.querySelector(
-            `#${id}`
+            `#item-${id}`
           ).style.backgroundImage = `url(${img})`;
         }}
       >

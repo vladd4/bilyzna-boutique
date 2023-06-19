@@ -1,10 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-async function getBase(setBilyzna) {
-  const response = await fetch("http://localhost:8080/admin/bra");
-  const data = await response.json();
-  setBilyzna([...data]);
-}
 function addItem(bilyzna, setBilyzna) {
   let art = document.querySelector("#item-art").value;
   let name = document.querySelector("#item-name").value;
@@ -70,27 +65,18 @@ function addItem(bilyzna, setBilyzna) {
   document.querySelector("#item-img2").value = "";
   document.querySelector("#item-type").value = "";
 }
+async function getBase(setBilyzna) {
+  const response = await fetch("http://localhost:8080/admin/bra", {
+    method: "GET",
+  });
+  const data = await response.json();
+  setBilyzna([...data]);
+}
 function delItem(e, setBilyzna) {
   let art = e.target
     .closest(".item")
     .querySelector(".item-articul").textContent;
   setBilyzna((current) => current.filter((item) => item.article !== art));
-  // fetch("http://localhost:8080/admin/bra", {
-  //   method: "DELETE",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(formData),
-  // })
-  //   .then((response) => {
-  //     if (response.ok) {
-  //     } else {
-  //       throw new Error("Failed to insert data");
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     // Handle error conditions
-  //   });
 }
 function editItem(e, bilyzna) {
   let block = e.target.closest(".item");
@@ -154,9 +140,6 @@ function preventDef(e) {
 }
 const AdminPanelView = ({ tovar, setTovar }) => {
   const [force, forceUpdate] = useState();
-  useEffect(() => {
-    getBase(setTovar);
-  }, []);
   return (
     <div className="bilyzna-block">
       <form

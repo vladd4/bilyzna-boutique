@@ -26,12 +26,24 @@ function addItem(bilyzna, setBilyzna) {
       image2: img2,
     },
   ]);
+  const formData = {
+    name: name,
+    brand: prod,
+    article: art,
+    amount: quant,
+    price: price,
+    type: type,
+    size: size,
+    description: info,
+    image1: img1,
+    image2: img2,
+  };
   fetch("/admin/bra", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(bilyzna),
+    body: JSON.stringify(formData),
   })
     .then((response) => {
       if (response.ok) {

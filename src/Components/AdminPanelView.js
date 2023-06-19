@@ -38,7 +38,7 @@ function addItem(bilyzna, setBilyzna) {
     image1: img1,
     image2: img2,
   };
-  fetch("/admin/bra", {
+  fetch("http://localhost:8080/admin/bra", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

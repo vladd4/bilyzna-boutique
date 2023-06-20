@@ -155,7 +155,7 @@ function App() {
               }
             ></Route>
             <Route
-              path={"bilyzna/" + tovar}
+              path={"bras/" + tovar}
               element={
                 <>
                   {" "}

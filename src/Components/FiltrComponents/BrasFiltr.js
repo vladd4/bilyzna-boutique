@@ -58,6 +58,13 @@ const BrasFiltr = () => {
     "95K",
     "95L",
   ]);
+  const [disabledButtons, setDisabledButtons] = useState({});
+  const handleClick = (buttonId) => {
+    setDisabledButtons((prevState) => ({
+      ...prevState,
+      [buttonId]: !prevState[buttonId], // Toggle the disabled state
+    }));
+  };
   return (
     <div className="side-block col-lg-2">
       <div className="side-pants material">
@@ -147,7 +154,13 @@ const BrasFiltr = () => {
         <div className="row size-row">
           {sizes.map((size) => {
             return (
-              <button className="top-size-btn col-lg-3 col-1">{size}</button>
+              <button
+                disabled={disabledButtons[sizes.indexOf(size)]}
+                onClick={() => handleClick(sizes.indexOf(size))}
+                className="top-size-btn col-lg-3 col-1"
+              >
+                {size}
+              </button>
             );
           })}
         </div>

@@ -5,7 +5,7 @@ import AdminPanelView from "../Components/AdminPanelView";
 
 const AdminPanel = () => {
   const [bilyzna, setBilyzna] = useState([]);
-  const [pijams, setPijams] = useState([]);
+  const [pants, setPants] = useState([]);
   return (
     <>
       <h1 align="center">Admin Panel Bilyzna Boutique</h1>
@@ -13,8 +13,8 @@ const AdminPanel = () => {
         <Link to="bra" class="items-nav-h">
           Жіноча білизна
         </Link>
-        <Link to="pijama" class="items-nav-h">
-          Піжами
+        <Link to="pants" class="items-nav-h">
+          Труси
         </Link>
         <a class="items-nav-h">Носки</a>
       </nav>
@@ -29,12 +29,9 @@ const AdminPanel = () => {
           }
         />
         <Route
-          path="/pijama"
+          path="/pants"
           element={
-            <AdminPanelView
-              tovar={pijams}
-              setTovar={setPijams}
-            ></AdminPanelView>
+            <AdminPanelView tovar={pants} setTovar={setPants}></AdminPanelView>
           }
         />
       </Routes>

@@ -25,7 +25,6 @@ const ItemsPageItem = ({
         setPageInfo(img, title, price, quantity, setProd, prod, id);
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0;
-        //setTovar(title);
       }}
       onMouseOver={() => {
         setTovar(title);

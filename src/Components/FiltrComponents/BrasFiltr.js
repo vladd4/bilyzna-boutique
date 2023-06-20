@@ -155,6 +155,7 @@ const BrasFiltr = () => {
           {sizes.map((size) => {
             return (
               <button
+                key={sizes.indexOf(size)}
                 disabled={disabledButtons[sizes.indexOf(size)]}
                 onClick={() => handleClick(sizes.indexOf(size))}
                 className="top-size-btn col-lg-3 col-1"

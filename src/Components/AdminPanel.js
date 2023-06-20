@@ -20,7 +20,7 @@ const AdminPanel = () => {
       </nav>
       <Routes>
         <Route
-          path="/bra"
+          path="/bra/*"
           element={
             <AdminPanelView
               tovar={bilyzna}

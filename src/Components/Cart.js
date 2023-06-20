@@ -22,7 +22,6 @@ function hideCart() {
 }
 
 const Cart = ({ cart, setCart }) => {
-  console.log(cart);
   return (
     <div className="cart">
       <div className="cart-main container">

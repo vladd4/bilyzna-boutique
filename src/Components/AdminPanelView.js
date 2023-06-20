@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link, Route, Routes } from "react-router-dom";
 
 async function addItem(bilyzna, setBilyzna) {
   let art = document.querySelector("#item-art").value;
@@ -23,6 +24,21 @@ async function addItem(bilyzna, setBilyzna) {
     image1: img1,
     image2: img2,
   };
+  setBilyzna([
+    ...bilyzna,
+    {
+      name: name,
+      brand: prod,
+      article: art,
+      amount: quant,
+      price: price,
+      type: type,
+      size: size,
+      description: info,
+      image1: img1,
+      image2: img2,
+    },
+  ]);
   await fetch("http://localhost:8080/admin/bra", {
     method: "POST",
     headers: {
@@ -32,21 +48,21 @@ async function addItem(bilyzna, setBilyzna) {
   })
     .then((response) => {
       if (response.ok) {
-        setBilyzna([
-          ...bilyzna,
-          {
-            name: name,
-            brand: prod,
-            article: art,
-            amount: quant,
-            price: price,
-            type: type,
-            size: size,
-            description: info,
-            image1: img1,
-            image2: img2,
-          },
-        ]);
+        // setBilyzna([
+        //   ...bilyzna,
+        //   {
+        //     name: name,
+        //     brand: prod,
+        //     article: art,
+        //     amount: quant,
+        //     price: price,
+        //     type: type,
+        //     size: size,
+        //     description: info,
+        //     image1: img1,
+        //     image2: img2,
+        //   },
+        // ]);
       } else {
         throw new Error("Failed to insert data");
       }
@@ -282,33 +298,40 @@ const AdminPanelView = ({ tovar, setTovar }) => {
       <div id="bilyzna" class="add-item-list">
         {tovar.map((item) => {
           return (
-            <div class="item" id={item.id}>
-              <p className="item-articul">{item.article}</p>
-              <p>{item.brand}</p>
-              <p className="name">{item.name}</p>
-              <p>{item.price}₴</p>
-              <p>{item.amount} шт</p>
-              <div className="info-div">
-                <p>{item.description}</p>
-              </div>
-              <p>{item.size}</p>
-              <p>{item.type}</p>
-              <div>
-                <p>{item.image1}</p>
-                <p>{item.image2}</p>
-              </div>
-              <button
-                class="edit-btn"
-                onClick={(e) => {
-                  editItem(e, setEditedItem, editedItem);
-                }}
-              >
-                Редагувати
-              </button>
-              <button onClick={(e) => delItem(e, setTovar)} class="del-btn">
-                Видалити
-              </button>
-            </div>
+            <>
+              <Link to={item.id}>
+                <div class="item" id={item.id}>
+                  <p className="item-articul">{item.article}</p>
+                  <p>{item.brand}</p>
+                  <p className="name">{item.name}</p>
+                  <p>{item.price}₴</p>
+                  <p>{item.amount} шт</p>
+                  <div className="info-div">
+                    <p>{item.description}</p>
+                  </div>
+                  <p>{item.size}</p>
+                  <p>{item.type}</p>
+                  <div>
+                    <p>{item.image1}</p>
+                    <p>{item.image2}</p>
+                  </div>
+                  <button
+                    class="edit-btn"
+                    onClick={(e) => {
+                      editItem(e, setEditedItem, editedItem);
+                    }}
+                  >
+                    Редагувати
+                  </button>
+                  <button onClick={(e) => delItem(e, setTovar)} class="del-btn">
+                    Видалити
+                  </button>
+                </div>
+              </Link>
+              <Routes>
+                <Route path={item.id}></Route>
+              </Routes>
+            </>
           );
         })}
       </div>

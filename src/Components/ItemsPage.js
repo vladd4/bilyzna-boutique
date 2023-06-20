@@ -2,8 +2,6 @@ import Block2 from "../imgs/Asset2.png";
 import Block3 from "../imgs/Asset3.png";
 import ItemsPageItem from "./ItemsPageItem";
 import { useState } from "react";
-import BrasFiltr from "./FiltrComponents/BrasFiltr";
-import PantsFiltr from "./FiltrComponents/PantsFiltr";
 
 function changeSize(clicked, setClicked) {
   setClicked(!clicked);

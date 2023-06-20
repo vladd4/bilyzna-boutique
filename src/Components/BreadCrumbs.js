@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 const BreadCrumbs = () => {
   const location = useLocation();
   let currentLink = "";
+  let i = 0;
   const crumbs = location.pathname
     .split("/")
     .filter((crumb) => crumb !== "")
@@ -13,7 +14,7 @@ const BreadCrumbs = () => {
       else if (crumb === "order") crumb = "кошик";
       else if (crumb === "pants") crumb = "трусики";
       return (
-        <Link className="bread-item" to={currentLink}>
+        <Link className="bread-item" to={currentLink} key={i++}>
           {crumb.charAt(0).toUpperCase() + crumb.slice(1)}
         </Link>
       );

@@ -89,11 +89,20 @@ async function getBase(setBilyzna) {
   setBilyzna([...data]);
 }
 async function getEdit(id, setEditedItem) {
-  const response = await fetch(`http://localhost:8080/admin/bra/${id}`, {
-    method: "GET",
-  });
-  const data = await response.json();
-  setEditedItem([...data]);
+  try {
+    const response = await fetch(`http://localhost:8080/admin/bra/${id}`, {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    const data = await response.json();
+    setEditedItem([...data]);
+  } catch (error) {
+    console.log(error);
+  }
 }
 async function postEdit(id, editedItem) {
   fetch(`http://localhost:8080/admin/bra/${id}`, {
@@ -139,23 +148,7 @@ async function editItem(e, setEditedItem, editedItem) {
   let block = e.target.closest(".item");
   let id = block.id;
   console.log(id);
-  // getEdit(id, setEditedItem);
-  await fetch(`http://localhost:8080/admin/bra/${id}`, {
-    method: "GET",
-  })
-    .then((response) => {
-      if (response.ok) {
-        // Update the local state or re-fetch the data if needed
-        const data = response.json();
-        setEditedItem([...data]);
-      } else {
-        throw new Error("Failed to delete data");
-      }
-    })
-    .catch((error) => {
-      // Handle error conditions
-      console.log(error);
-    });
+  await getEdit(id, setEditedItem);
   console.log(editedItem);
   // let art = block.querySelector(".item-articul").textContent;
   // let new_bilyzna = bilyzna.filter((item) => item.article === art);

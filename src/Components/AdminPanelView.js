@@ -135,11 +135,27 @@ async function delItem(e, setBilyzna) {
       console.log(error);
     });
 }
-function editItem(e, setEditedItem, editedItem) {
+async function editItem(e, setEditedItem, editedItem) {
   let block = e.target.closest(".item");
   let id = block.id;
   console.log(id);
-  getEdit(id, setEditedItem);
+  // getEdit(id, setEditedItem);
+  await fetch(`http://localhost:8080/admin/bra/${id}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      if (response.ok) {
+        // Update the local state or re-fetch the data if needed
+        const data = response.json();
+        setEditedItem([...data]);
+      } else {
+        throw new Error("Failed to delete data");
+      }
+    })
+    .catch((error) => {
+      // Handle error conditions
+      console.log(error);
+    });
   console.log(editedItem);
   // let art = block.querySelector(".item-articul").textContent;
   // let new_bilyzna = bilyzna.filter((item) => item.article === art);
@@ -316,16 +332,14 @@ const AdminPanelView = ({ tovar, setTovar }) => {
                   <p>{item.image1}</p>
                   <p>{item.image2}</p>
                 </div>
-                <Link to="1">
-                  <button
-                    class="edit-btn"
-                    onClick={(e) => {
-                      editItem(e, setEditedItem, editedItem);
-                    }}
-                  >
-                    Редагувати
-                  </button>
-                </Link>
+                <button
+                  class="edit-btn"
+                  onClick={(e) => {
+                    editItem(e, setEditedItem, editedItem);
+                  }}
+                >
+                  Редагувати
+                </button>
                 <button onClick={(e) => delItem(e, setTovar)} class="del-btn">
                   Видалити
                 </button>

@@ -138,7 +138,9 @@ async function delItem(e, setBilyzna) {
 function editItem(e, setEditedItem, editedItem) {
   let block = e.target.closest(".item");
   let id = block.id;
+  console.log(id);
   getEdit(id, setEditedItem);
+  console.log(editedItem);
   // let art = block.querySelector(".item-articul").textContent;
   // let new_bilyzna = bilyzna.filter((item) => item.article === art);
   document.querySelector("#item-art").value = editedItem.article;
@@ -299,22 +301,22 @@ const AdminPanelView = ({ tovar, setTovar }) => {
         {tovar.map((item) => {
           return (
             <>
-              <Link to={item.id}>
-                <div class="item" id={item.id}>
-                  <p className="item-articul">{item.article}</p>
-                  <p>{item.brand}</p>
-                  <p className="name">{item.name}</p>
-                  <p>{item.price}₴</p>
-                  <p>{item.amount} шт</p>
-                  <div className="info-div">
-                    <p>{item.description}</p>
-                  </div>
-                  <p>{item.size}</p>
-                  <p>{item.type}</p>
-                  <div>
-                    <p>{item.image1}</p>
-                    <p>{item.image2}</p>
-                  </div>
+              <div class="item" id={item.id}>
+                <p className="item-articul">{item.article}</p>
+                <p>{item.brand}</p>
+                <p className="name">{item.name}</p>
+                <p>{item.price}₴</p>
+                <p>{item.amount} шт</p>
+                <div className="info-div">
+                  <p>{item.description}</p>
+                </div>
+                <p>{item.size}</p>
+                <p>{item.type}</p>
+                <div>
+                  <p>{item.image1}</p>
+                  <p>{item.image2}</p>
+                </div>
+                <Link to="1">
                   <button
                     class="edit-btn"
                     onClick={(e) => {
@@ -323,14 +325,11 @@ const AdminPanelView = ({ tovar, setTovar }) => {
                   >
                     Редагувати
                   </button>
-                  <button onClick={(e) => delItem(e, setTovar)} class="del-btn">
-                    Видалити
-                  </button>
-                </div>
-              </Link>
-              <Routes>
-                <Route path={item.id}></Route>
-              </Routes>
+                </Link>
+                <button onClick={(e) => delItem(e, setTovar)} class="del-btn">
+                  Видалити
+                </button>
+              </div>
             </>
           );
         })}

@@ -55,17 +55,19 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        {window.location.pathname !== "/admin" && (
-          <>
-            <Banner></Banner>
-            <Header
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
-            ></Header>
-            <BreadCrumbs></BreadCrumbs>
-            <Cart cart={cart} setCart={setCart}></Cart>
-          </>
-        )}
+        {window.location.pathname !== "/admin" &&
+          window.location.pathname !== "/admin/bra" &&
+          window.location.pathname !== "/admin/pants" && (
+            <>
+              <Banner></Banner>
+              <Header
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+              ></Header>
+              <BreadCrumbs></BreadCrumbs>
+              <Cart cart={cart} setCart={setCart}></Cart>
+            </>
+          )}
         <Routes>
           <Route path="/admin/*" element={<AdminPanel></AdminPanel>}></Route>
         </Routes>
@@ -177,12 +179,14 @@ function App() {
             ></Route>
           </Routes>
         </div>
-        {window.location.pathname !== "/admin" && (
-          <>
-            <Newsletter></Newsletter>
-            <Footer></Footer>
-          </>
-        )}
+        {window.location.pathname !== "/admin" &&
+          window.location.pathname !== "/admin/bra" &&
+          window.location.pathname !== "/admin/pants" && (
+            <>
+              <Newsletter></Newsletter>
+              <Footer></Footer>
+            </>
+          )}
         <ToTop></ToTop>
       </div>
     </BrowserRouter>

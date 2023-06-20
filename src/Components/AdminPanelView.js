@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function addItem(bilyzna, setBilyzna) {
+async function addItem(bilyzna, setBilyzna) {
   let art = document.querySelector("#item-art").value;
   let name = document.querySelector("#item-name").value;
   let prod = document.querySelector("#item-prod").value;
@@ -11,21 +11,6 @@ function addItem(bilyzna, setBilyzna) {
   let img1 = document.querySelector("#item-img1").value;
   let img2 = document.querySelector("#item-img2").value;
   let type = document.querySelector("#item-type").value;
-  setBilyzna([
-    ...bilyzna,
-    {
-      name: name,
-      brand: prod,
-      article: art,
-      amount: quant,
-      price: price,
-      type: type,
-      size: size,
-      description: info,
-      image1: img1,
-      image2: img2,
-    },
-  ]);
   const formData = {
     name: name,
     brand: prod,
@@ -38,7 +23,7 @@ function addItem(bilyzna, setBilyzna) {
     image1: img1,
     image2: img2,
   };
-  fetch("http://localhost:8080/admin/bra", {
+  await fetch("http://localhost:8080/admin/bra", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -47,12 +32,27 @@ function addItem(bilyzna, setBilyzna) {
   })
     .then((response) => {
       if (response.ok) {
+        setBilyzna([
+          ...bilyzna,
+          {
+            name: name,
+            brand: prod,
+            article: art,
+            amount: quant,
+            price: price,
+            type: type,
+            size: size,
+            description: info,
+            image1: img1,
+            image2: img2,
+          },
+        ]);
       } else {
         throw new Error("Failed to insert data");
       }
     })
     .catch((error) => {
-      // Handle error conditions
+      console.log(error);
     });
   document.querySelector("#item-art").value = "";
   document.querySelector("#item-name").value = "";
@@ -72,44 +72,74 @@ async function getBase(setBilyzna) {
   const data = await response.json();
   setBilyzna([...data]);
 }
-function delItem(e, setBilyzna) {
-  let id = e.target.closest(".item").id;
-
-  // Send a DELETE request to the backend API
+async function getEdit(id, setEditedItem) {
+  const response = await fetch(`http://localhost:8080/admin/bra/${id}`, {
+    method: "GET",
+  });
+  const data = await response.json();
+  setEditedItem([...data]);
+}
+async function postEdit(id, editedItem) {
   fetch(`http://localhost:8080/admin/bra/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(editedItem),
+  })
+    .then((response) => {
+      if (response.ok) {
+      } else {
+        throw new Error("Failed to insert data");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+async function delItem(e, setBilyzna) {
+  let id = e.target.closest(".item").id;
+  let art = e.target
+    .closest(".item")
+    .querySelector(".item-articul").textContent;
+  // Send a DELETE request to the backend API
+  await fetch(`http://localhost:8080/admin/bra/${id}`, {
     method: "DELETE",
   })
     .then((response) => {
       if (response.ok) {
         // Update the local state or re-fetch the data if needed
-        setBilyzna((current) => current.filter((item) => item.id !== id));
+        setBilyzna((current) => current.filter((item) => item.article !== art));
       } else {
         throw new Error("Failed to delete data");
       }
     })
     .catch((error) => {
       // Handle error conditions
+      console.log(error);
     });
 }
-function editItem(e, bilyzna) {
+function editItem(e, setEditedItem, editedItem) {
   let block = e.target.closest(".item");
-  let art = block.querySelector(".item-articul").textContent;
-  let new_bilyzna = bilyzna.filter((item) => item.article === art);
-  document.querySelector("#item-art").value = new_bilyzna[0].article;
-  document.querySelector("#item-name").value = new_bilyzna[0].name;
-  document.querySelector("#item-price").value = new_bilyzna[0].price;
-  document.querySelector("#item-quantity").value = new_bilyzna[0].amount;
-  document.querySelector("#item-info").value = new_bilyzna[0].description;
-  document.querySelector("#item-size").value = new_bilyzna[0].size;
-  document.querySelector("#item-img1").value = new_bilyzna[0].image1;
-  document.querySelector("#item-prod").value = new_bilyzna[0].brand;
-  document.querySelector("#item-img2").value = new_bilyzna[0].image2;
-  document.querySelector("#item-type").value = new_bilyzna[0].type;
+  let id = block.id;
+  getEdit(id, setEditedItem);
+  // let art = block.querySelector(".item-articul").textContent;
+  // let new_bilyzna = bilyzna.filter((item) => item.article === art);
+  document.querySelector("#item-art").value = editedItem.article;
+  document.querySelector("#item-name").value = editedItem.name;
+  document.querySelector("#item-price").value = editedItem.price;
+  document.querySelector("#item-quantity").value = editedItem.amount;
+  document.querySelector("#item-info").value = editedItem.description;
+  document.querySelector("#item-size").value = editedItem.size;
+  document.querySelector("#item-img1").value = editedItem.image1;
+  document.querySelector("#item-prod").value = editedItem.brand;
+  document.querySelector("#item-img2").value = editedItem.image2;
+  document.querySelector("#item-type").value = editedItem.type;
 
   document.querySelector(".admin-add").style.display = "none";
   document.querySelector(".admin-save").style.display = "block";
 }
-function updateItem(bilyzna, forceUpdate) {
+function updateItem(editedItem, setForce) {
   let art = document.querySelector("#item-art").value;
   let name = document.querySelector("#item-name").value;
   let prod = document.querySelector("#item-prod").value;
@@ -120,20 +150,19 @@ function updateItem(bilyzna, forceUpdate) {
   let img1 = document.querySelector("#item-img1").value;
   let img2 = document.querySelector("#item-img2").value;
   let type = document.querySelector("#item-type").value;
-  for (let i = 0; i < bilyzna.length; i++) {
-    if (bilyzna[i].article === art) {
-      bilyzna[i].name = name;
-      bilyzna[i].brand = prod;
-      bilyzna[i].price = price;
-      bilyzna[i].amount = quant;
-      bilyzna[i].description = info;
-      bilyzna[i].size = size;
-      bilyzna[i].image1 = img1;
-      bilyzna[i].image2 = img2;
-      bilyzna[i].type = type;
-    }
-  }
-  forceUpdate(new Date());
+
+  editedItem.name = name;
+  editedItem.brand = prod;
+  editedItem.article = art;
+  editedItem.amount = quant;
+  editedItem.price = price;
+  editedItem.type = type;
+  editedItem.size = size;
+  editedItem.description = info;
+  editedItem.image1 = img1;
+  editedItem.image2 = img2;
+
+  postEdit(editedItem.id, editedItem);
   document.querySelector("#item-art").value = "";
   document.querySelector("#item-name").value = "";
   document.querySelector("#item-price").value = "";
@@ -147,12 +176,14 @@ function updateItem(bilyzna, forceUpdate) {
 
   document.querySelector(".admin-add").style.display = "block";
   document.querySelector(".admin-save").style.display = "none";
+  setForce(new Date());
 }
 function preventDef(e) {
   e.preventDefault();
 }
 const AdminPanelView = ({ tovar, setTovar }) => {
-  const [force, forceUpdate] = useState();
+  const [force, setForce] = useState();
+  const [editedItem, setEditedItem] = useState({});
   useEffect(() => {
     getBase(setTovar);
   }, []);
@@ -240,7 +271,7 @@ const AdminPanelView = ({ tovar, setTovar }) => {
             <button
               className="admin-save"
               onClick={(e) => {
-                updateItem(tovar, forceUpdate);
+                updateItem(editedItem, setForce);
               }}
             >
               Зберегти
@@ -269,7 +300,7 @@ const AdminPanelView = ({ tovar, setTovar }) => {
               <button
                 class="edit-btn"
                 onClick={(e) => {
-                  editItem(e, tovar);
+                  editItem(e, setEditedItem, editedItem);
                 }}
               >
                 Редагувати

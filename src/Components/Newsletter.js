@@ -1,10 +1,24 @@
 import { useState } from "react";
 
+function sendMail(mail) {
+  console.log(mail, "was send succesfully");
+}
+function validateMail(mail, setMail) {
+  if (!mail.toString().includes("@")) {
+    setMail("");
+    document.querySelector(".news-input").placeholder =
+      "Введіть коректну пошту";
+    document.querySelector(".news-input").classList.add("news-input-error");
+  } else {
+    sendMail(mail);
+    setMail("");
+    document.querySelector(".news-input").placeholder =
+      "Залиште електронну адресу";
+    document.querySelector(".news-input").classList.remove("news-input-error");
+  }
+}
 const Newsletter = () => {
   const [mail, setMail] = useState("");
-  function sendMail(mail) {
-    console.log(mail, "was send succesfully");
-  }
   return (
     <div
       className="newsletter-div"
@@ -16,8 +30,9 @@ const Newsletter = () => {
         <h3 className="news-h">Будь в курсі всіх новинок!</h3>
         <p className="news-p">
           Підпишіться на отримання новин та отримайте 100 грн знижки на першу
-          покупку! Вся інформація захищена від шахраїв та керується адміном.
-          Детальну інформацію можна знайти <a className="news-link">тут</a>.
+          покупку! Вся інформація захищена від шахраїв та керується
+          адміністратором. Детальну інформацію можна знайти{" "}
+          <a className="news-link">тут</a>.
         </p>
         <div className="input-div">
           <input
@@ -32,8 +47,7 @@ const Newsletter = () => {
           <button
             className="news-btn"
             onClick={(e) => {
-              sendMail(mail);
-              setMail("");
+              validateMail(mail, setMail);
             }}
           >
             Підписатись

@@ -44,6 +44,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <div className="copyright">
+        <p className="bilyzna-tm">&trade;Bilyzna Boutique 2023.</p>
+      </div>
     </div>
   );
 };

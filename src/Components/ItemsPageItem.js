@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 function setPageInfo(img, title, price, quantity, setProd, prod, id) {
   setProd({ id: id, title: title, img: img, price: price, quantity: quantity });
   console.log(prod);

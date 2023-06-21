@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
 
 async function addItem(bilyzna, setBilyzna) {
   let art = document.querySelector("#item-art").value;
@@ -209,11 +208,11 @@ function preventDef(e) {
   e.preventDefault();
 }
 const AdminPanelView = ({ tovar, setTovar }) => {
-  const [force, setForce] = useState();
+  const [setForce] = useState();
   const [editedItem, setEditedItem] = useState({});
   useEffect(() => {
     getBase(setTovar);
-  }, []);
+  }, [setTovar]);
   return (
     <div className="bilyzna-block">
       <form

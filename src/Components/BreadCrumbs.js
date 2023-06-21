@@ -28,7 +28,7 @@ const BreadCrumbs = () => {
   }
   useEffect(() => {
     check();
-  }, [crumbs]);
+  });
   return (
     <div className="breadcrumbs container">
       <ul className="bread-list">

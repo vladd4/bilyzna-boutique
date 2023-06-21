@@ -69,6 +69,14 @@ body {
   font-weight: 300;
   cursor: pointer;
   text-transform: capitalize;
+  background-color: transparent;
+  border: none;
+}
+#sort-btn {
+  cursor: auto;
+}
+#sort-btn:hover {
+  color: #000;
 }
 .sort-select {
   font-size: calc(var(--size) / 1.6);

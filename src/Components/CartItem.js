@@ -1,5 +1,3 @@
-import Img1 from "../imgs/dress1.jpg";
-
 function removeFromCart(setCart, id) {
   setCart((current) => current.filter((cart) => cart.id !== id));
 }

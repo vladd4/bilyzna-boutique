@@ -41,15 +41,15 @@ const ItemsPage = ({
             <div className="filtr-block">
               <div className="filt-text">
                 <li className="nav-item ">
-                  <a
+                  <button
+                    disabled
                     className="nav-link"
-                    href="#"
-                    role="button"
+                    id="sort-btn"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
                     Сортуй
-                  </a>
+                  </button>
                 </li>
                 <select
                   name="select"

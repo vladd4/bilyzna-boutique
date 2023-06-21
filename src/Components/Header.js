@@ -93,9 +93,7 @@ const Header = ({ searchValue, setSearchValue }) => {
       </nav>
       <div className="container-fluid links-row">
         <div className="drop-wrap">
-          <a className="nav-link" to="/">
-            Новинки
-          </a>
+          <Link className="nav-link">Новинки</Link>
           <ul className="drop-list">
             <li className="drop-list-item">Бюсгалтера</li>
             <li className="drop-list-item">Трусики</li>
@@ -105,9 +103,7 @@ const Header = ({ searchValue, setSearchValue }) => {
           </ul>
         </div>
         <div className="drop-wrap">
-          <a className="nav-link" to="/">
-            Білизна
-          </a>
+          <Link className="nav-link">Білизна</Link>
           <ul className="drop-list">
             <li className="drop-list-item-li">
               <Link className="drop-list-item" to="/bras">

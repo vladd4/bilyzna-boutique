@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const BrasFiltr = () => {
-  const [sizes, setSizes] = useState([
+  const [sizes] = useState([
     "75B",
     "75C",
     "75D",

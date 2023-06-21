@@ -16,7 +16,7 @@ const AdminPanel = () => {
         <Link to="pants" class="items-nav-h">
           Труси
         </Link>
-        <a class="items-nav-h">Носки</a>
+        <Link class="items-nav-h">Носки</Link>
       </nav>
       <Routes>
         <Route

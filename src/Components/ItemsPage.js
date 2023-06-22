@@ -6,12 +6,12 @@ import { useState } from "react";
 function changeSize(clicked, setClicked) {
   setClicked(!clicked);
 }
-async function sortBy(setProducts) {
+async function sortBy(base, setProducts) {
   const selectValue =
     document.querySelector(".sort-select").options[
       document.querySelector(".sort-select").selectedIndex
     ].value;
-  const response = await fetch(`https://localhost:8080/bras${selectValue}`);
+  const response = await fetch(`https://localhost:8080/${base}/${selectValue}`);
   const data = await response.json();
   setProducts([...data]);
 }
@@ -26,6 +26,7 @@ const ItemsPage = ({
   tovar,
   setTovar,
   filtr,
+  base,
 }) => {
   const [clicked, setClicked] = useState(false);
   return (
@@ -51,13 +52,13 @@ const ItemsPage = ({
                 <select
                   name="select"
                   className="sort-select"
-                  onChange={(e) => sortBy(setProducts)}
+                  onChange={(e) => sortBy(base, setProducts)}
                 >
-                  <option value="top" selected>
+                  <option value="sortDate" selected>
                     найпопулярніші
                   </option>
-                  <option value="asc">від дешевих</option>
-                  <option value="desc">від дорогих</option>
+                  <option value="sortCheap">від дешевих</option>
+                  <option value="sortExp">від дорогих</option>
                 </select>
               </div>
               <div className="filt-icons">

@@ -115,6 +115,7 @@ function App() {
                     tovar={tovar}
                     setTovar={setTovar}
                     filtr={<BrasFiltr></BrasFiltr>}
+                    base={"bras"}
                   ></ItemsPage>
                 </>
               }
@@ -134,6 +135,7 @@ function App() {
                     tovar={tovar}
                     setTovar={setTovar}
                     filtr={<PantsFiltr></PantsFiltr>}
+                    base={"pants"}
                   ></ItemsPage>
                 </>
               }
@@ -152,6 +154,8 @@ function App() {
                     prod={prod}
                     tovar={tovar}
                     setTovar={setTovar}
+                    filtr={<PantsFiltr></PantsFiltr>}
+                    base={"pijami"}
                   ></ItemsPage>
                 </>
               }

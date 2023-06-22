@@ -98,7 +98,7 @@ async function getEdit(id, setEditedItem) {
     }
 
     const data = await response.json();
-    setEditedItem([...data]);
+    setEditedItem(data);
   } catch (error) {
     console.log(error);
   }
@@ -165,7 +165,7 @@ async function editItem(e, setEditedItem, editedItem) {
   document.querySelector(".admin-add").style.display = "none";
   document.querySelector(".admin-save").style.display = "block";
 }
-function updateItem(editedItem, setForce) {
+function updateItem(editedItem, setForce, setBilyzna, bilyzna) {
   let art = document.querySelector("#item-art").value;
   let name = document.querySelector("#item-name").value;
   let prod = document.querySelector("#item-prod").value;
@@ -189,6 +189,21 @@ function updateItem(editedItem, setForce) {
   editedItem.image2 = img2;
 
   postEdit(editedItem.id, editedItem);
+  // setBilyzna([
+  //   ...bilyzna,
+  //   {
+  //     name: editedItem.name,
+  //     brand: editedItem.brand,
+  //     article: editedItem.article,
+  //     amount: editedItem.amount,
+  //     price: editedItem.price,
+  //     type: editedItem.type,
+  //     size: editedItem.size,
+  //     description: editedItem.description,
+  //     image1: editedItem.image1,
+  //     image2: editedItem.image2,
+  //   },
+  // ]);
   document.querySelector("#item-art").value = "";
   document.querySelector("#item-name").value = "";
   document.querySelector("#item-price").value = "";
@@ -202,7 +217,7 @@ function updateItem(editedItem, setForce) {
 
   document.querySelector(".admin-add").style.display = "block";
   document.querySelector(".admin-save").style.display = "none";
-  setForce(new Date());
+  //setForce(new Date());
 }
 function preventDef(e) {
   e.preventDefault();
@@ -297,7 +312,7 @@ const AdminPanelView = ({ tovar, setTovar }) => {
             <button
               className="admin-save"
               onClick={(e) => {
-                updateItem(editedItem, setForce);
+                updateItem(editedItem, setForce, setTovar, tovar);
               }}
             >
               Зберегти

@@ -11,10 +11,7 @@ async function sortBy(setProducts) {
     document.querySelector(".sort-select").options[
       document.querySelector(".sort-select").selectedIndex
     ].value;
-  console.log(selectValue);
-  const response = await fetch(
-    `https://645ccfac250a246ae30ed653.mockapi.io/bilyzna/products?sortBy=price&order=${selectValue}`
-  );
+  const response = await fetch(`https://localhost:8080/bras${selectValue}`);
   const data = await response.json();
   setProducts([...data]);
 }

@@ -964,6 +964,7 @@ body a:hover {
   display: none;
   padding-left: 5%;
   margin-bottom: 5%;
+  color: #fff;
 }
 .drop-menu-drop li {
   font-size: calc(var(--size) * 1.3);
@@ -973,6 +974,16 @@ body a:hover {
   color: #fff;
 }
 .drop-menu-drop li:hover {
+  color: var(--main-color);
+  transition: all 0.3s;
+}
+.drop-menu-drop li a {
+  font-size: calc(var(--size) * 1.3);
+  scale: 1;
+  transition: all 0.3s;
+  color: #fff;
+}
+.drop-menu-drop li a:hover {
   color: var(--main-color);
   transition: all 0.3s;
 }
@@ -1281,4 +1292,24 @@ body a:hover {
 }
 .items-page-h {
   font-size: calc(var(--size) * 1.4);
+}
+.admin-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15%;
+}
+.admin-login input {
+  width: 30%;
+  margin-bottom: 1%;
+}
+.admin-login button {
+  width: 30%;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+.admin-login button:hover {
+  opacity: 0.5;
+  transition: all 0.3s;
 }

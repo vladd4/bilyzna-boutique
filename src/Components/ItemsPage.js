@@ -19,8 +19,6 @@ const ItemsPage = ({
   products,
   title,
   setProducts,
-  cart,
-  setCart,
   setProd,
   prod,
   tovar,
@@ -58,6 +56,7 @@ const ItemsPage = ({
                     найпопулярніші
                   </option>
                   <option value="sortCheap">від дешевих</option>
+
                   <option value="sortExp">від дорогих</option>
                 </select>
               </div>

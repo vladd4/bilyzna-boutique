@@ -19,6 +19,7 @@ import WhyUs from "./Components/WhyUs";
 import AdminPanel from "./Components/AdminPanel";
 import BrasFiltr from "./Components/FiltrComponents/BrasFiltr";
 import PantsFiltr from "./Components/FiltrComponents/PantsFiltr";
+import AdminLogin from "./Components/AdminLogin";
 
 async function getData(setProducts) {
   const response = await fetch(
@@ -32,13 +33,32 @@ async function getPijami(setPijami) {
   const data = await response.json();
   setPijami([...data]);
 }
-// function hideSearch(setSearchValue) {
-//   document.querySelector(".main-search").classList.remove("main-search-show");
-//   setSearchValue("");
-// }
-
+function hideHeader(e) {
+  if (!document.querySelector(".drop-menu-nav").contains(e.target)) {
+    document.querySelector(".drop-menu-nav").classList.remove("drop-show");
+  }
+}
+function hideCart() {
+  document.querySelector(".changed-components").style.opacity = "1";
+  document.querySelector(".changed-components").style.pointerEvents = "auto";
+  document.querySelector(".navbar").style.opacity = "1";
+  document.querySelector(".navbar").style.pointerEvents = "auto";
+  document.querySelector(".newsletter-div").style.opacity = "1";
+  document.querySelector(".newsletter-div").style.pointerEvents = "auto";
+  document.querySelector("#footer").style.opacity = "1";
+  document.querySelector("#footer").style.pointerEvents = "auto";
+  document.querySelector(".banner").style.opacity = "1";
+  document.querySelector(".banner").style.pointerEvents = "auto";
+  document.querySelector(".breadcrumbs").style.opacity = "1";
+  document.querySelector(".breadcrumbs").style.pointerEvents = "auto";
+  document.querySelector(".links-row").style.opacity = "1";
+  document.querySelector(".links-row").style.pointerEvents = "auto";
+  document.body.style.overflow = "auto";
+  document.querySelector(".cart").classList.remove("show-cart");
+}
 function App() {
   const [products, setProducts] = useState([]);
+  const [logged, setLogged] = useState(false);
   useEffect(() => {
     getData(setProducts);
   }, []);
@@ -51,13 +71,15 @@ function App() {
   const [cart, setCart] = useState([]);
   const [prod, setProd] = useState([]);
   const [tovar, setTovar] = useState("Нижня білизна");
+  const [log] = useState(false);
 
   return (
     <BrowserRouter>
       <div className="App">
         {window.location.pathname !== "/admin" &&
           window.location.pathname !== "/admin/bra" &&
-          window.location.pathname !== "/admin/pants" && (
+          window.location.pathname !== "/admin/pants" &&
+          window.location.pathname !== "/login" && (
             <>
               <Banner></Banner>
               <Header
@@ -69,7 +91,14 @@ function App() {
             </>
           )}
         <Routes>
-          <Route path="/admin/*" element={<AdminPanel></AdminPanel>}></Route>
+          <Route
+            path="/login/"
+            element={<AdminLogin log={log}></AdminLogin>}
+          ></Route>
+          <Route
+            path="/admin/*"
+            element={<AdminPanel isLogged={log}></AdminPanel>}
+          ></Route>
         </Routes>
         <div
           className="changed-components"
@@ -77,13 +106,8 @@ function App() {
             document
               .querySelector(".changed-components")
               .addEventListener("click", (e) => {
-                if (
-                  !document.querySelector(".drop-menu-nav").contains(e.target)
-                ) {
-                  document
-                    .querySelector(".drop-menu-nav")
-                    .classList.remove("drop-show");
-                }
+                hideHeader(e);
+                hideCart();
               })
           }
         >
@@ -108,13 +132,11 @@ function App() {
                     products={products}
                     title={"Бюстгальтери"}
                     setProducts={setProducts}
-                    cart={cart}
-                    setCart={setCart}
                     setProd={setProd}
                     prod={prod}
                     tovar={tovar}
                     setTovar={setTovar}
-                    filtr={<BrasFiltr></BrasFiltr>}
+                    filtr={<BrasFiltr setTovar={setTovar}></BrasFiltr>}
                     base={"bras"}
                   ></ItemsPage>
                 </>
@@ -128,8 +150,6 @@ function App() {
                     products={products}
                     title={"Трусики"}
                     setProducts={setProducts}
-                    cart={cart}
-                    setCart={setCart}
                     setProd={setProd}
                     prod={prod}
                     tovar={tovar}
@@ -148,8 +168,6 @@ function App() {
                     products={pijami}
                     title={"Жіночі піжами"}
                     setProducts={setPijami}
-                    cart={cart}
-                    setCart={setCart}
                     setProd={setProd}
                     prod={prod}
                     tovar={tovar}
@@ -185,7 +203,8 @@ function App() {
         </div>
         {window.location.pathname !== "/admin" &&
           window.location.pathname !== "/admin/bra" &&
-          window.location.pathname !== "/admin/pants" && (
+          window.location.pathname !== "/admin/pants" &&
+          window.location.pathname !== "/login" && (
             <>
               <Newsletter></Newsletter>
               <Footer></Footer>

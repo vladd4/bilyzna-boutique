@@ -13,9 +13,11 @@ const BreadCrumbs = () => {
       if (crumb === "bras") crumb = "бюстгальтери";
       else if (crumb === "order") crumb = "кошик";
       else if (crumb === "pants") crumb = "трусики";
+      let crumbText = crumb.charAt(0).toUpperCase() + crumb.slice(1);
+      crumbText = decodeURIComponent(crumbText.replace(/\+/g, " "));
       return (
         <Link className="bread-item" to={currentLink} key={i++}>
-          {crumb.charAt(0).toUpperCase() + crumb.slice(1)}
+          {crumbText.charAt(0).toUpperCase() + crumbText.slice(1).toLowerCase()}
         </Link>
       );
     });

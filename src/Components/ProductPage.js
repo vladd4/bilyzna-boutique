@@ -67,6 +67,7 @@ const ProductPage = ({ prod, cart, setCart }) => {
           </div>
           <div className="col-lg-3 prod-page-info">
             <h3 className="prod-page-h">{prod.title}</h3>
+            <p className="prod-page-art">Виробник: AVA</p>
             <p className="prod-page-art">Артикул: 23574934</p>
             <p className="prod-page-size">
               Розмір:{" "}
@@ -150,10 +151,6 @@ const ProductPage = ({ prod, cart, setCart }) => {
                 baza do wizytowych stylizacji – można do niej założyć obuwie w
                 dowolnym kolorze oraz wyrazistą biżuterię, która doskonale
                 będzie się prezentować na gładkim tle.
-              </p>
-              <h5 className="prod-info-h">Склад: </h5>
-              <p className="prod-info-p">
-                Odcień écru jest niezwykle twarzowy, pasuje też na wiele okazji.
               </p>
             </div>
           </div>

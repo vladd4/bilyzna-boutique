@@ -1,6 +1,7 @@
 import Logo from "../imgs/logo.png";
 import Inst from "../imgs/instagram.png";
 import Face from "../imgs/facebook.png";
+import { Link } from "react-router-dom";
 
 function showDrop(e) {
   e.target
@@ -61,8 +62,12 @@ const DropMenu = () => {
             </span>
           </div>
           <div className="drop-menu-drop" id="drop1">
-            <li>Жіноча білизна</li>
-            <li>Трусики</li>
+            <li>
+              <Link to="/bras">Бюстгалтери</Link>{" "}
+            </li>
+            <li>
+              <Link to="/pants">Трусики</Link>
+            </li>
             <li>Піжами</li>
             <li>Носки</li>
           </div>
@@ -103,8 +108,12 @@ const DropMenu = () => {
             </span>
           </div>
           <div className="drop-menu-drop" id="drop3">
-            <li>Жіноча білизна</li>
-            <li>Трусики</li>
+            <li>
+              <Link to="/bras">Бюстгалтери</Link>{" "}
+            </li>
+            <li>
+              <Link to="/pants">Трусики</Link>
+            </li>
             <li>Піжами</li>
             <li>Носки</li>
           </div>
@@ -113,8 +122,20 @@ const DropMenu = () => {
         <button className="drop-li-btn">Для малят</button>
       </ul>
       <div className="drop-icons-block">
-        <img className="drop-icon-img" alt="" src={Inst}></img>
-        <img className="drop-icon-img" alt="" src={Face}></img>
+        <a
+          href="https://www.instagram.com/bilyzna.boutique/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img className="drop-icon-img" alt="" src={Inst}></img>
+        </a>
+        <a
+          href="https://www.facebook.com/bilyzna.boutique/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img className="drop-icon-img" alt="" src={Face}></img>
+        </a>
       </div>
     </div>
   );

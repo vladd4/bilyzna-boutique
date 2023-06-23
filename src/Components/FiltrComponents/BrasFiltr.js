@@ -1,6 +1,28 @@
 import { useState } from "react";
 
-const BrasFiltr = () => {
+async function filtSize(setTovar, size) {
+  const response = await fetch(`http://localhost:8080/admin/bra/${size}`, {
+    method: "GET",
+  });
+  const data = await response.json();
+  setTovar([...data]);
+}
+async function filtBrand(setTovar, brand) {
+  console.log(brand);
+  const response = await fetch(`http://localhost:8080/admin/bra/${brand}`, {
+    method: "GET",
+  });
+  const data = await response.json();
+  setTovar([...data]);
+}
+async function filtType(setTovar, type) {
+  const response = await fetch(`http://localhost:8080/admin/bra/${type}`, {
+    method: "GET",
+  });
+  const data = await response.json();
+  setTovar([...data]);
+}
+const BrasFiltr = ({ setTovar }) => {
   const [sizes] = useState([
     "75B",
     "75C",
@@ -87,6 +109,9 @@ const BrasFiltr = () => {
             type="checkbox"
             id="ava"
             value="ava"
+            onClick={() => {
+              filtBrand(setTovar, "ava");
+            }}
           ></input>
           <label for="ava">AVA</label>
         </div>
@@ -96,6 +121,9 @@ const BrasFiltr = () => {
             type="checkbox"
             id="GORSENIA"
             value="GORSENIA"
+            onClick={() => {
+              filtBrand(setTovar, "GORSENIA");
+            }}
           ></input>
           <label for="GORSENIA">GORSENIA</label>
         </div>
@@ -105,6 +133,9 @@ const BrasFiltr = () => {
             type="checkbox"
             id="GAIA"
             value="GAIA"
+            onClick={() => {
+              filtBrand(setTovar, "GAIA");
+            }}
           ></input>
           <label for="GAIA">GAIA</label>
         </div>
@@ -118,6 +149,9 @@ const BrasFiltr = () => {
             type="checkbox"
             id="braz"
             value="Новинки"
+            onClick={() => {
+              filtType(setTovar, "schiln");
+            }}
           ></input>
           <label for="braz">Ущільнені</label>
         </div>
@@ -127,6 +161,9 @@ const BrasFiltr = () => {
             type="checkbox"
             id="slip"
             value="Вироблено в Україні"
+            onClick={() => {
+              filtType(setTovar, "soft");
+            }}
           ></input>
           <label for="slip">М'які</label>
         </div>
@@ -136,6 +173,9 @@ const BrasFiltr = () => {
             type="checkbox"
             id="str"
             value="Ціна тижня"
+            onClick={() => {
+              filtType(setTovar, "pushup");
+            }}
           ></input>
           <label for="str">Push-ups</label>
         </div>
@@ -145,6 +185,9 @@ const BrasFiltr = () => {
             type="checkbox"
             id="short"
             value="Ціна тижня"
+            onClick={() => {
+              filtType(setTovar, "napivschiln");
+            }}
           ></input>
           <label for="short">Напівщільні</label>
         </div>
@@ -157,7 +200,10 @@ const BrasFiltr = () => {
               <button
                 key={sizes.indexOf(size)}
                 disabled={disabledButtons[sizes.indexOf(size)]}
-                onClick={() => handleClick(sizes.indexOf(size))}
+                onClick={() => {
+                  handleClick(sizes.indexOf(size));
+                  filtSize(setTovar, "xs");
+                }}
                 className="top-size-btn col-lg-3 col-1"
               >
                 {size}

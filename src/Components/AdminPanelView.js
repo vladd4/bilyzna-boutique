@@ -23,21 +23,6 @@ async function addItem(bilyzna, setBilyzna) {
     image1: img1,
     image2: img2,
   };
-  setBilyzna([
-    ...bilyzna,
-    {
-      name: name,
-      brand: prod,
-      article: art,
-      amount: quant,
-      price: price,
-      type: type,
-      size: size,
-      description: info,
-      image1: img1,
-      image2: img2,
-    },
-  ]);
   await fetch("http://localhost:8080/admin/bra", {
     method: "POST",
     headers: {
@@ -47,21 +32,31 @@ async function addItem(bilyzna, setBilyzna) {
   })
     .then((response) => {
       if (response.ok) {
-        // setBilyzna([
-        //   ...bilyzna,
-        //   {
-        //     name: name,
-        //     brand: prod,
-        //     article: art,
-        //     amount: quant,
-        //     price: price,
-        //     type: type,
-        //     size: size,
-        //     description: info,
-        //     image1: img1,
-        //     image2: img2,
-        //   },
-        // ]);
+        setBilyzna([
+          ...bilyzna,
+          {
+            name: name,
+            brand: prod,
+            article: art,
+            amount: quant,
+            price: price,
+            type: type,
+            size: size,
+            description: info,
+            image1: img1,
+            image2: img2,
+          },
+        ]);
+        document.querySelector("#item-art").value = "";
+        document.querySelector("#item-name").value = "";
+        document.querySelector("#item-price").value = "";
+        document.querySelector("#item-quantity").value = "";
+        document.querySelector("#item-info").value = "";
+        document.querySelector("#item-size").value = "";
+        document.querySelector("#item-img1").value = "";
+        document.querySelector("#item-prod").value = "";
+        document.querySelector("#item-img2").value = "";
+        document.querySelector("#item-type").value = "";
       } else {
         throw new Error("Failed to insert data");
       }
@@ -69,16 +64,6 @@ async function addItem(bilyzna, setBilyzna) {
     .catch((error) => {
       console.log(error);
     });
-  document.querySelector("#item-art").value = "";
-  document.querySelector("#item-name").value = "";
-  document.querySelector("#item-price").value = "";
-  document.querySelector("#item-quantity").value = "";
-  document.querySelector("#item-info").value = "";
-  document.querySelector("#item-size").value = "";
-  document.querySelector("#item-img1").value = "";
-  document.querySelector("#item-prod").value = "";
-  document.querySelector("#item-img2").value = "";
-  document.querySelector("#item-type").value = "";
 }
 async function getBase(setBilyzna) {
   const response = await fetch("http://localhost:8080/admin/bra", {
@@ -103,7 +88,7 @@ async function getEdit(id, setEditedItem) {
     console.log(error);
   }
 }
-async function postEdit(id, editedItem) {
+async function postEdit(id, editedItem, setBilyzna) {
   fetch(`http://localhost:8080/admin/bra/${id}`, {
     method: "POST",
     headers: {
@@ -113,6 +98,7 @@ async function postEdit(id, editedItem) {
   })
     .then((response) => {
       if (response.ok) {
+        getBase(setBilyzna);
       } else {
         throw new Error("Failed to insert data");
       }
@@ -143,29 +129,15 @@ async function delItem(e, setBilyzna) {
       console.log(error);
     });
 }
-async function editItem(e, setEditedItem, editedItem) {
+async function editItem(e, setEditedItem) {
   let block = e.target.closest(".item");
   let id = block.id;
-  console.log(id);
   await getEdit(id, setEditedItem);
-  console.log(editedItem);
-  // let art = block.querySelector(".item-articul").textContent;
-  // let new_bilyzna = bilyzna.filter((item) => item.article === art);
-  document.querySelector("#item-art").value = editedItem.article;
-  document.querySelector("#item-name").value = editedItem.name;
-  document.querySelector("#item-price").value = editedItem.price;
-  document.querySelector("#item-quantity").value = editedItem.amount;
-  document.querySelector("#item-info").value = editedItem.description;
-  document.querySelector("#item-size").value = editedItem.size;
-  document.querySelector("#item-img1").value = editedItem.image1;
-  document.querySelector("#item-prod").value = editedItem.brand;
-  document.querySelector("#item-img2").value = editedItem.image2;
-  document.querySelector("#item-type").value = editedItem.type;
-
+  // No need to access editedItem here anymore
   document.querySelector(".admin-add").style.display = "none";
   document.querySelector(".admin-save").style.display = "block";
 }
-function updateItem(editedItem, setForce, setBilyzna, bilyzna) {
+function updateItem(editedItem, setForce, setBilyzna) {
   let art = document.querySelector("#item-art").value;
   let name = document.querySelector("#item-name").value;
   let prod = document.querySelector("#item-prod").value;
@@ -188,22 +160,8 @@ function updateItem(editedItem, setForce, setBilyzna, bilyzna) {
   editedItem.image1 = img1;
   editedItem.image2 = img2;
 
-  postEdit(editedItem.id, editedItem);
-  // setBilyzna([
-  //   ...bilyzna,
-  //   {
-  //     name: editedItem.name,
-  //     brand: editedItem.brand,
-  //     article: editedItem.article,
-  //     amount: editedItem.amount,
-  //     price: editedItem.price,
-  //     type: editedItem.type,
-  //     size: editedItem.size,
-  //     description: editedItem.description,
-  //     image1: editedItem.image1,
-  //     image2: editedItem.image2,
-  //   },
-  // ]);
+  postEdit(editedItem.id, editedItem, setBilyzna);
+
   document.querySelector("#item-art").value = "";
   document.querySelector("#item-name").value = "";
   document.querySelector("#item-price").value = "";
@@ -217,7 +175,6 @@ function updateItem(editedItem, setForce, setBilyzna, bilyzna) {
 
   document.querySelector(".admin-add").style.display = "block";
   document.querySelector(".admin-save").style.display = "none";
-  //setForce(new Date());
 }
 function preventDef(e) {
   e.preventDefault();
@@ -228,6 +185,21 @@ const AdminPanelView = ({ tovar, setTovar }) => {
   useEffect(() => {
     getBase(setTovar);
   }, [setTovar]);
+  useEffect(() => {
+    // Update input values when editedItem changes
+    if (Object.keys(editedItem).length !== 0) {
+      document.querySelector("#item-art").value = editedItem.article;
+      document.querySelector("#item-name").value = editedItem.name;
+      document.querySelector("#item-price").value = editedItem.price;
+      document.querySelector("#item-quantity").value = editedItem.amount;
+      document.querySelector("#item-info").value = editedItem.description;
+      document.querySelector("#item-size").value = editedItem.size;
+      document.querySelector("#item-img1").value = editedItem.image1;
+      document.querySelector("#item-prod").value = editedItem.brand;
+      document.querySelector("#item-img2").value = editedItem.image2;
+      document.querySelector("#item-type").value = editedItem.type;
+    }
+  }, [editedItem]);
   return (
     <div className="bilyzna-block">
       <form

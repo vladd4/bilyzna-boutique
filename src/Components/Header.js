@@ -15,7 +15,7 @@ import DropMenu from "./DropMenu";
 function showCart() {
   document.querySelector(".cart").classList.add("show-cart");
   document.querySelector(".changed-components").style.opacity = "0.3";
-  document.querySelector(".changed-components").style.pointerEvents = "none";
+  //document.querySelector(".changed-components").style.pointerEvents = "none";
   document.querySelector(".navbar").style.opacity = "0.3";
   document.querySelector(".navbar").style.pointerEvents = "none";
   document.querySelector(".newsletter-div").style.opacity = "0.3";
@@ -108,7 +108,7 @@ const Header = ({ searchValue, setSearchValue }) => {
             <li className="drop-list-item-li">
               <Link className="drop-list-item" to="/bras">
                 Бюстгалтери
-              </Link>
+              </Link>{" "}
             </li>
             <li>
               <Link className="drop-list-item" to="/pants">

@@ -1,5 +1,7 @@
-function removeFromCart(setCart, id) {
-  setCart((current) => current.filter((cart) => cart.id !== id));
+function removeFromCart(setCart, id, size) {
+  setCart((current) =>
+    current.filter((cart) => cart.id !== id || cart.size !== size)
+  );
 }
 
 const CartItem = ({ img, title, price, quantity, id, setCart, size }) => {
@@ -15,7 +17,7 @@ const CartItem = ({ img, title, price, quantity, id, setCart, size }) => {
       <span
         className="col-lg-2 col-2 delete-cart-btn"
         onClick={() => {
-          removeFromCart(setCart, id);
+          removeFromCart(setCart, id, size);
         }}
       >
         x

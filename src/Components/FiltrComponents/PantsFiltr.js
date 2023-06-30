@@ -30,7 +30,7 @@ const PantsFiltr = () => {
             id="ava"
             value="ava"
           ></input>
-          <label for="ava">AVA</label>
+          <label htmlFor="ava">AVA</label>
         </div>
         <div>
           <input
@@ -39,7 +39,7 @@ const PantsFiltr = () => {
             id="GORSENIA"
             value="GORSENIA"
           ></input>
-          <label for="GORSENIA">GORSENIA</label>
+          <label htmlFor="GORSENIA">GORSENIA</label>
         </div>
         <div>
           <input
@@ -48,7 +48,7 @@ const PantsFiltr = () => {
             id="GAIA"
             value="GAIA"
           ></input>
-          <label for="GAIA">GAIA</label>
+          <label htmlFor="GAIA">GAIA</label>
         </div>
         <div>
           <input
@@ -57,7 +57,7 @@ const PantsFiltr = () => {
             id="LAMA"
             value="LAMA"
           ></input>
-          <label for="LAMA">LAMA</label>
+          <label htmlFor="LAMA">LAMA</label>
         </div>
         <div>
           <input
@@ -66,7 +66,7 @@ const PantsFiltr = () => {
             id="KEY"
             value="KEY"
           ></input>
-          <label for="KEY">KEY</label>
+          <label htmlFor="KEY">KEY</label>
         </div>
       </div>
 
@@ -79,7 +79,7 @@ const PantsFiltr = () => {
             id="braz"
             value="Новинки"
           ></input>
-          <label for="braz">Бразиліана</label>
+          <label htmlFor="braz">Бразиліана</label>
         </div>
         <div>
           <input
@@ -88,7 +88,7 @@ const PantsFiltr = () => {
             id="slip"
             value="Вироблено в Україні"
           ></input>
-          <label for="slip">Сліпи</label>
+          <label htmlFor="slip">Сліпи</label>
         </div>
         <div>
           <input
@@ -97,7 +97,7 @@ const PantsFiltr = () => {
             id="str"
             value="Ціна тижня"
           ></input>
-          <label for="str">Бікіні</label>
+          <label htmlFor="str">Бікіні</label>
         </div>
         <div>
           <input
@@ -106,7 +106,7 @@ const PantsFiltr = () => {
             id="short"
             value="Ціна тижня"
           ></input>
-          <label for="short">Стрінги</label>
+          <label htmlFor="short">Стрінги</label>
         </div>
       </div>
       <div className="side-pants size-bust">

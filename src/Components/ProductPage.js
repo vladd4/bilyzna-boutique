@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import ItemView from "./ItemView";
+import Context from "../Hooks/Context";
 
 function showImage(e) {
   document.querySelector(".item-view-popup").style.display = "grid";
@@ -21,52 +22,56 @@ function addToCart(cart, setCart, title, price, img, quantity, id, buttons) {
     }
   }
   let size = getSize(buttons);
+  // Check if the item with the same ID and size already exists in the cart
+  let existingItemIndex = cart.findIndex(
+    (item) => item.id === id && item.size === size
+  );
 
-  setCart([
-    ...cart,
-    {
+  if (existingItemIndex !== -1) {
+    // If the item exists, update the quantity and price
+    cart[existingItemIndex].quantity += quantity;
+    cart[existingItemIndex].price += price;
+  } else {
+    // If the item doesn't exist, add it to the cart
+    cart.push({
       id: id,
       title: title,
       img: img,
       price: price,
       quantity: quantity,
       size: size,
-    },
-  ]);
-
-  for (var i = 0; i < cart.length; i++) {
-    if (id === cart[i].id) {
-      cart[i].quantity += quantity;
-      cart[i].price += price;
-    }
+    });
   }
+
+  // Update the cart state
+  setCart([...cart]);
+
   document.querySelector(".btn-page").classList.add("btn-page-added");
   document.querySelector(".btn-page").disabled = true;
-  console.log(cart);
 }
-const ProductPage = ({ prod, cart, setCart }) => {
-  //console.log(prod.title, prod.img, prod.price);
+const ProductPage = () => {
   const [quantValue, setQuantValue] = useState(1);
+  const properties = useContext(Context);
   return (
     <>
-      <div className="product-page container" id={prod.id}>
+      <div className="product-page container" id={properties.prod.id}>
         <div className="row prod-row">
           <div className="row prod-img-row col-lg-8">
             <img
               className="col-lg-6 col-sm-6 col-6 prod-img"
               alt=""
-              src={prod.img}
+              src={properties.prod.img}
               onClick={(e) => showImage(e)}
             ></img>
             <img
               className="col-lg-6 col-sm-6 col-6 prod-img"
               alt=""
-              src={prod.img}
+              src={properties.prod.img}
               onClick={(e) => showImage(e)}
             ></img>
           </div>
           <div className="col-lg-3 prod-page-info">
-            <h3 className="prod-page-h">{prod.title}</h3>
+            <h3 className="prod-page-h">{properties.prod.title}</h3>
             <p className="prod-page-art">Виробник: AVA</p>
             <p className="prod-page-art">Артикул: 23574934</p>
             <p className="prod-page-size">
@@ -99,9 +104,11 @@ const ProductPage = ({ prod, cart, setCart }) => {
                 L
               </button>
             </p>
-            <p className="prod-page-price">Ціна: {prod.price} грн.</p>
+            <p className="prod-page-price">
+              Ціна: {properties.prod.price} грн.
+            </p>
             <p className="prod-page-price prod-page-quantity">
-              Кількість: {prod.quantity} шт.
+              Кількість: {properties.prod.quantity} шт.
             </p>
             <div className="quantity-wrapper">
               <button
@@ -120,7 +127,8 @@ const ProductPage = ({ prod, cart, setCart }) => {
               <button
                 className="quantity-btn plus"
                 onClick={(e) => {
-                  if (quantValue < prod.quantity) setQuantValue(quantValue + 1);
+                  if (quantValue < properties.prod.quantity)
+                    setQuantValue(quantValue + 1);
                 }}
               >
                 +
@@ -130,13 +138,13 @@ const ProductPage = ({ prod, cart, setCart }) => {
               className="prod-page-cart-btn btn-page"
               onClick={(e) =>
                 addToCart(
-                  cart,
-                  setCart,
-                  prod.title,
-                  prod.price,
-                  prod.img,
+                  properties.cart,
+                  properties.setCart,
+                  properties.prod.title,
+                  properties.prod.price,
+                  properties.prod.img,
                   quantValue,
-                  prod.id,
+                  properties.prod.id,
                   document.querySelectorAll(".size-btn")
                 )
               }

@@ -1,21 +1,14 @@
 import Search from "../imgs/search.png";
 import Cart from "../imgs/cart.png";
+import Insta from "../imgs/inst_header.png";
+import Face from "../imgs/face-header.png";
 import { Link } from "react-router-dom";
-import Logo from "../imgs/logo.png";
+import Logo from "../imgs/logo_white.svg";
 import DropMenu from "./DropMenu";
-
-// window.addEventListener("scroll", function () {
-//   if (window.scrollY >= 5) {
-//     this.document.querySelector(".head-wrap").classList.add("sticky-nav");
-//   } else {
-//     this.document.querySelector(".head-wrap").classList.remove("sticky-nav");
-//   }
-// });
 
 function showCart() {
   document.querySelector(".cart").classList.add("show-cart");
   document.querySelector(".changed-components").style.opacity = "0.3";
-  //document.querySelector(".changed-components").style.pointerEvents = "none";
   document.querySelector(".navbar").style.opacity = "0.3";
   document.querySelector(".navbar").style.pointerEvents = "none";
   document.querySelector(".newsletter-div").style.opacity = "0.3";
@@ -41,7 +34,7 @@ function showSearch(searchValue, setSearchValue) {
 }
 const Header = ({ searchValue, setSearchValue }) => {
   return (
-    <div className="head-wrap">
+    <div className="head-wrap" id="header">
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
           <button
@@ -58,7 +51,23 @@ const Header = ({ searchValue, setSearchValue }) => {
           </button>
           <DropMenu></DropMenu>
           <p className="ua-en">
-            <b>Укр</b>/Рус
+            <a
+              href="https://www.instagram.com/bilyzna.boutique/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                className="header-social header-social-left"
+                src={Insta}
+              ></img>
+            </a>
+            <a
+              href="https://www.facebook.com/bilyzna.boutique/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img className="header-social" src={Face}></img>
+            </a>
           </p>
           <Link className="navbar-brand" to="/">
             <img className="logo" alt="logo" src={Logo}></img>

@@ -21,8 +21,6 @@ const ItemsPage = ({
   setProducts,
   setProd,
   prod,
-  tovar,
-  setTovar,
   filtr,
   base,
 }) => {
@@ -90,8 +88,6 @@ const ItemsPage = ({
                   size={clicked ? "col-lg-4" : "col-lg-3"}
                   setProd={setProd}
                   prod={prod}
-                  tovar={tovar}
-                  setTovar={setTovar}
                 ></ItemsPageItem>
               );
             })}

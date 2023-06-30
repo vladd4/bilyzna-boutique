@@ -1,6 +1,8 @@
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
-import Empty from "../imgs/e-cart.png";
+import Empty from "../imgs/empty-cart.png";
+import Context from "../Hooks/Context";
+import { useContext } from "react";
 
 function hideCart() {
   document.querySelector(".cart").classList.remove("show-cart");
@@ -21,22 +23,24 @@ function hideCart() {
   document.body.style.overflow = "auto";
 }
 
-const Cart = ({ cart, setCart }) => {
+const Cart = () => {
+  const properties = useContext(Context);
   return (
     <div className="cart">
       <div className="cart-main container">
         <div className="cart-items-block">
-          {cart.length >= 1 ? (
-            cart.map((item) => {
+          {properties.cart.length >= 1 ? (
+            properties.cart.map((item) => {
               return (
                 <CartItem
+                  key={item.id}
                   title={item.title}
                   img={item.img}
                   price={item.price}
                   quantity={item.quantity}
                   id={item.id}
-                  cart={cart}
-                  setCart={setCart}
+                  cart={properties.cart}
+                  setCart={properties.setCart}
                   size={item.size}
                 ></CartItem>
               );
@@ -51,19 +55,24 @@ const Cart = ({ cart, setCart }) => {
           )}
         </div>
         <div className="cart-foot">
-          {cart.length >= 1 ? (
+          {properties.cart.length >= 1 ? (
             <>
               <p className="cart-total">
                 Загальна вартість:{" "}
                 <b className="b-price">
                   {" "}
-                  {cart.reduce((acc, total) => acc + total.price, 0)} ₴
+                  {properties.cart.reduce(
+                    (acc, total) => acc + total.price,
+                    0
+                  )}{" "}
+                  ₴
                 </b>
               </p>
-              <button className="cart-order-btn" onClick={(e) => hideCart()}>
-                {" "}
-                <Link to="/order">Оформити замовлення </Link>
-              </button>
+              <Link className="cart-order-btn-link" to="/order">
+                <button className="cart-order-btn" onClick={(e) => hideCart()}>
+                  Оформити замовлення{" "}
+                </button>
+              </Link>
               <button className="cart-cont-btn" onClick={(e) => hideCart()}>
                 Продовжити покупки
               </button>{" "}

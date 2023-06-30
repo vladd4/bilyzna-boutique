@@ -1,6 +1,6 @@
 const WhyUs = () => {
   return (
-    <div className="whyUs-div">
+    <div className="whyUs-div" id="why-us">
       <h3 className="whyUs-h">Чому ми?</h3>
       <p className="whyUs-p1">
         Ласкаво просимо до Білизна Boutique, вашого найкращого джерела якісної

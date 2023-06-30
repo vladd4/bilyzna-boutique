@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import Context from "../Hooks/Context";
 function setPageInfo(img, title, price, quantity, setProd, prod, id) {
   setProd({ id: id, title: title, img: img, price: price, quantity: quantity });
-  console.log(prod);
 }
 const ItemsPageItem = ({
   id,
@@ -13,12 +14,11 @@ const ItemsPageItem = ({
   description,
   setProd,
   prod,
-  tovar,
-  setTovar,
 }) => {
+  const properties = useContext(Context);
   return (
     <Link
-      to={tovar}
+      to={properties.tovar}
       className={"col-sm-4 col-4 " + size}
       onClick={(e) => {
         setPageInfo(img, title, price, quantity, setProd, prod, id);
@@ -26,7 +26,7 @@ const ItemsPageItem = ({
         document.documentElement.scrollTop = 0;
       }}
       onMouseOver={() => {
-        setTovar(title);
+        properties.setTovar(title);
       }}
     >
       <div

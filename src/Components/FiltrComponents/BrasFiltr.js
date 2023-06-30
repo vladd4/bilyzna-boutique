@@ -113,7 +113,7 @@ const BrasFiltr = ({ setTovar }) => {
               filtBrand(setTovar, "ava");
             }}
           ></input>
-          <label for="ava">AVA</label>
+          <label htmlFor="ava">AVA</label>
         </div>
         <div>
           <input
@@ -125,7 +125,7 @@ const BrasFiltr = ({ setTovar }) => {
               filtBrand(setTovar, "GORSENIA");
             }}
           ></input>
-          <label for="GORSENIA">GORSENIA</label>
+          <label htmlFor="GORSENIA">GORSENIA</label>
         </div>
         <div>
           <input
@@ -137,7 +137,7 @@ const BrasFiltr = ({ setTovar }) => {
               filtBrand(setTovar, "GAIA");
             }}
           ></input>
-          <label for="GAIA">GAIA</label>
+          <label htmlFor="GAIA">GAIA</label>
         </div>
       </div>
 
@@ -153,7 +153,7 @@ const BrasFiltr = ({ setTovar }) => {
               filtType(setTovar, "schiln");
             }}
           ></input>
-          <label for="braz">Ущільнені</label>
+          <label htmlFor="braz">Ущільнені</label>
         </div>
         <div>
           <input
@@ -165,7 +165,7 @@ const BrasFiltr = ({ setTovar }) => {
               filtType(setTovar, "soft");
             }}
           ></input>
-          <label for="slip">М'які</label>
+          <label htmlFor="slip">М'які</label>
         </div>
         <div>
           <input
@@ -177,7 +177,7 @@ const BrasFiltr = ({ setTovar }) => {
               filtType(setTovar, "pushup");
             }}
           ></input>
-          <label for="str">Push-ups</label>
+          <label htmlFor="str">Push-ups</label>
         </div>
         <div>
           <input
@@ -189,7 +189,7 @@ const BrasFiltr = ({ setTovar }) => {
               filtType(setTovar, "napivschiln");
             }}
           ></input>
-          <label for="short">Напівщільні</label>
+          <label htmlFor="short">Напівщільні</label>
         </div>
       </div>
       <div className="side-pants size-bust">

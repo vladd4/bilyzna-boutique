@@ -1,8 +1,8 @@
 const Banner = () => {
   return (
-    <div className="container-fluid banner">
+    <div className="container-fluid banner" id="banner">
       <p className="banner-text">
-        Безкоштовна доставка від 500 грн | 14 днів на повернення
+        Безкоштовна доставка від 2000 грн | 10% знижка на першу покупку
       </p>
     </div>
   );

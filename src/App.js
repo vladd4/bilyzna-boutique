@@ -19,7 +19,11 @@ import WhyUs from "./Components/WhyUs";
 import AdminPanel from "./Components/AdminPanel";
 import BrasFiltr from "./Components/FiltrComponents/BrasFiltr";
 import PantsFiltr from "./Components/FiltrComponents/PantsFiltr";
-import AdminLogin from "./Components/AdminLogin";
+import Login from "./Components/Login";
+import Return from "./Components/Return";
+import Delivery from "./Components/Delivery";
+import Context from "./Hooks/Context";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 async function getData(setProducts) {
   const response = await fetch(
@@ -58,7 +62,6 @@ function hideCart() {
 }
 function App() {
   const [products, setProducts] = useState([]);
-  const [logged, setLogged] = useState(false);
   useEffect(() => {
     getData(setProducts);
   }, []);
@@ -71,148 +74,143 @@ function App() {
   const [cart, setCart] = useState([]);
   const [prod, setProd] = useState([]);
   const [tovar, setTovar] = useState("Нижня білизна");
-  const [log] = useState(false);
+  const [token, setToken] = useState("");
 
+  const properties = {
+    cart,
+    setCart,
+    prod,
+    setProd,
+    tovar,
+    setTovar,
+  };
   return (
-    <BrowserRouter>
-      <div className="App">
-        {window.location.pathname !== "/admin" &&
-          window.location.pathname !== "/admin/bra" &&
-          window.location.pathname !== "/admin/pants" &&
-          window.location.pathname !== "/login" && (
-            <>
-              <Banner></Banner>
-              <Header
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-              ></Header>
-              <BreadCrumbs></BreadCrumbs>
-              <Cart cart={cart} setCart={setCart}></Cart>
-            </>
-          )}
-        <Routes>
-          <Route
-            path="/login/"
-            element={<AdminLogin log={log}></AdminLogin>}
-          ></Route>
-          <Route
-            path="/admin/*"
-            element={<AdminPanel isLogged={log}></AdminPanel>}
-          ></Route>
-        </Routes>
-        <div
-          className="changed-components"
-          onClick={(e) =>
-            document
-              .querySelector(".changed-components")
-              .addEventListener("click", (e) => {
-                hideHeader(e);
-                hideCart();
-              })
-          }
-        >
+    <Context.Provider value={properties}>
+      <BrowserRouter>
+        <div className="App">
+          {window.location.pathname !== "/admin" &&
+            window.location.pathname !== "/admin/bra" &&
+            window.location.pathname !== "/admin/pants" &&
+            window.location.pathname !== "/login" && (
+              <>
+                <Banner></Banner>
+                <Header
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
+                ></Header>
+                <BreadCrumbs></BreadCrumbs>
+                <Cart></Cart>
+              </>
+            )}
           <Routes>
             <Route
-              path="/"
-              element={
-                <>
-                  <Slider></Slider>
-                  <CardRow></CardRow>
-                  <StyleBanner></StyleBanner>
-                  <LogosSlider></LogosSlider>
-                  <WhyUs></WhyUs>
-                </>
-              }
+              path="/login/"
+              element={<Login setToken={setToken}></Login>}
             ></Route>
             <Route
-              path="/bras/*"
-              element={
-                <>
-                  <ItemsPage
-                    products={products}
-                    title={"Бюстгальтери"}
-                    setProducts={setProducts}
-                    setProd={setProd}
-                    prod={prod}
-                    tovar={tovar}
-                    setTovar={setTovar}
-                    filtr={<BrasFiltr setTovar={setTovar}></BrasFiltr>}
-                    base={"bras"}
-                  ></ItemsPage>
-                </>
-              }
-            ></Route>
-            <Route
-              path="/pants/*"
-              element={
-                <>
-                  <ItemsPage
-                    products={products}
-                    title={"Трусики"}
-                    setProducts={setProducts}
-                    setProd={setProd}
-                    prod={prod}
-                    tovar={tovar}
-                    setTovar={setTovar}
-                    filtr={<PantsFiltr></PantsFiltr>}
-                    base={"pants"}
-                  ></ItemsPage>
-                </>
-              }
-            ></Route>
-            <Route
-              path="/pijami/*"
-              element={
-                <>
-                  <ItemsPage
-                    products={pijami}
-                    title={"Жіночі піжами"}
-                    setProducts={setPijami}
-                    setProd={setProd}
-                    prod={prod}
-                    tovar={tovar}
-                    setTovar={setTovar}
-                    filtr={<PantsFiltr></PantsFiltr>}
-                    base={"pijami"}
-                  ></ItemsPage>
-                </>
-              }
-            ></Route>
-            <Route
-              path={"bras/" + tovar}
-              element={
-                <>
-                  {" "}
-                  <ProductPage
-                    prod={prod}
-                    cart={cart}
-                    setCart={setCart}
-                  ></ProductPage>
-                </>
-              }
-            ></Route>
-            <Route
-              path="/order"
-              element={
-                <>
-                  <OrderPage cart={cart} setCart={setCart}></OrderPage>
-                </>
-              }
+              path="/admin/*"
+              element={<ProtectedRoute component={AdminPanel} token={token} />}
             ></Route>
           </Routes>
+          <div
+            className="changed-components"
+            onClick={(e) =>
+              document
+                .querySelector(".changed-components")
+                .addEventListener("click", (e) => {
+                  hideHeader(e);
+                  hideCart();
+                })
+            }
+          >
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Slider></Slider>
+                    <CardRow></CardRow>
+                    <StyleBanner></StyleBanner>
+                    <LogosSlider></LogosSlider>
+                    <WhyUs></WhyUs>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/bras/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Бюстгальтери"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<BrasFiltr setTovar={setTovar}></BrasFiltr>}
+                      base={"bras"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/pants/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Трусики"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<PantsFiltr></PantsFiltr>}
+                      base={"pants"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/pijami/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={pijami}
+                      title={"Жіночі піжами"}
+                      setProducts={setPijami}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<PantsFiltr></PantsFiltr>}
+                      base={"pijami"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path={"bras/" + tovar}
+                element={
+                  <>
+                    {" "}
+                    <ProductPage></ProductPage>
+                  </>
+                }
+              ></Route>
+              <Route path="/order" element={<OrderPage></OrderPage>}></Route>
+              <Route path="/return" element={<Return></Return>}></Route>
+              <Route path="/delivery" element={<Delivery></Delivery>}></Route>
+            </Routes>
+          </div>
+          {window.location.pathname !== "/admin" &&
+            window.location.pathname !== "/admin/bra" &&
+            window.location.pathname !== "/admin/pants" &&
+            window.location.pathname !== "/login" && (
+              <>
+                <Newsletter></Newsletter>
+                <Footer></Footer>
+              </>
+            )}
+          <ToTop></ToTop>
         </div>
-        {window.location.pathname !== "/admin" &&
-          window.location.pathname !== "/admin/bra" &&
-          window.location.pathname !== "/admin/pants" &&
-          window.location.pathname !== "/login" && (
-            <>
-              <Newsletter></Newsletter>
-              <Footer></Footer>
-            </>
-          )}
-        <ToTop></ToTop>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Context.Provider>
   );
 }
 

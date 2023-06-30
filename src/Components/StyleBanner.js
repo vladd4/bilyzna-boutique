@@ -7,7 +7,7 @@ const StyleBanner = () => {
       <div className="style-text-block">
         <h2 className="style-h">#bilyznastyle</h2>
         <p className="style-p">
-          Переглянь наш профіль на інстаграмі та ділись своїми стилізаціями
+          Перегляньте наш профіль в інстаграмі та діліться своїми стилізаціями
         </p>
       </div>
       <div className="style-img-block row">

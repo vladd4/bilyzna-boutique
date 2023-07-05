@@ -15,59 +15,56 @@ async function addItem(bilyzna, setBilyzna) {
   im1.append("image", img1);
   let im2 = new FormData();
   im2.append("image", img2);
-  const formData = {
-    name: name,
-    brand: prod,
-    article: art,
-    amount: quant,
-    price: price,
-    type: type,
-    size: size,
-    description: info,
-    image1: im1,
-    image2: im2,
-  };
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("brand", prod);
+  formData.append("article", art);
+  formData.append("amount", quant);
+  formData.append("price", price);
+  formData.append("type", type);
+  formData.append("size", size);
+  formData.append("description", info);
+  formData.append("image1", im1);
+  formData.append("image2", im2);
+
   await fetch("http://localhost:8080/admin/bra", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
     },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (response.ok) {
-        setBilyzna([
-          ...bilyzna,
-          {
-            name: name,
-            brand: prod,
-            article: art,
-            amount: quant,
-            price: price,
-            type: type,
-            size: size,
-            description: info,
-            image1: im1,
-            image2: im2,
-          },
-        ]);
-        document.querySelector("#item-art").value = "";
-        document.querySelector("#item-name").value = "";
-        document.querySelector("#item-price").value = "";
-        document.querySelector("#item-quantity").value = "";
-        document.querySelector("#item-info").value = "";
-        document.querySelector("#item-size").value = "";
-        document.querySelector("#item-img1").value = "";
-        document.querySelector("#item-prod").value = "";
-        document.querySelector("#item-img2").value = "";
-        document.querySelector("#item-type").value = "";
-      } else {
-        throw new Error("Failed to insert data");
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    body: formData,
+  }).then((response) => {
+    if (response.ok) {
+      setBilyzna([
+        ...bilyzna,
+        {
+          name: name,
+          brand: prod,
+          article: art,
+          amount: quant,
+          price: price,
+          type: type,
+          size: size,
+          description: info,
+          image1: im1,
+          image2: im2,
+        },
+      ]);
+      // Reset form fields
+      document.querySelector("#item-art").value = "";
+      document.querySelector("#item-name").value = "";
+      document.querySelector("#item-price").value = "";
+      document.querySelector("#item-quantity").value = "";
+      document.querySelector("#item-info").value = "";
+      document.querySelector("#item-size").value = "";
+      document.querySelector("#item-img1").value = "";
+      document.querySelector("#item-prod").value = "";
+      document.querySelector("#item-img2").value = "";
+      document.querySelector("#item-type").value = "";
+    } else {
+      throw new Error("Failed to insert data");
+    }
+  });
 }
 async function getBase(setBilyzna) {
   const response = await fetch("http://localhost:8080/admin/bra", {

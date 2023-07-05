@@ -11,10 +11,10 @@ async function addItem(bilyzna, setBilyzna) {
   let img1 = document.querySelector("#item-img1").files[0];
   let img2 = document.querySelector("#item-img2").files[0];
   let type = document.querySelector("#item-type").value;
-  let image1 = new FormData();
-  image1.append("image", img1);
-  let image2 = new FormData();
-  image2.append("image", img2);
+  let im1 = new FormData();
+  im1.append("image", img1);
+  let im2 = new FormData();
+  im2.append("image", img2);
   const formData = {
     name: name,
     brand: prod,
@@ -24,8 +24,8 @@ async function addItem(bilyzna, setBilyzna) {
     type: type,
     size: size,
     description: info,
-    image1: image1,
-    image2: image2,
+    image1: im1,
+    image2: im2,
   };
   await fetch("http://localhost:8080/admin/bra", {
     method: "POST",
@@ -47,8 +47,8 @@ async function addItem(bilyzna, setBilyzna) {
             type: type,
             size: size,
             description: info,
-            image1: image1,
-            image2: image2,
+            image1: im1,
+            image2: im2,
           },
         ]);
         document.querySelector("#item-art").value = "";

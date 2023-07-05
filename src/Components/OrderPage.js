@@ -1,4 +1,5 @@
 import CartItem from "./CartItem";
+import Modal from "./Modal";
 import { useContext } from "react";
 import Context from "../Hooks/Context";
 function nextForm() {
@@ -32,7 +33,7 @@ async function sendCartToTelegram(message) {
     console.error("Error submitting form:", error);
   }
 }
-function sendCart(cart, setCart) {
+function sendCart(cart) {
   const name = document.querySelector(".input-name").value;
   const tel = document.querySelector(".input-phone").value;
   const mail = document.querySelector(".input-mail").value;
@@ -58,7 +59,7 @@ function sendCart(cart, setCart) {
   document.querySelector(".order-main-form").style.display = "flex";
   document.querySelector(".order-second-form").style.display = "none";
 
-  setCart([]);
+  document.querySelector("#cart-success").showModal();
 }
 const OrderPage = () => {
   const properties = useContext(Context);
@@ -106,7 +107,7 @@ const OrderPage = () => {
             <input
               id="mail"
               className="input-order input-mail"
-              placeholder="Введіть пошту"
+              placeholder="Введіть електронну адресу"
             ></input>
             <button className="order-submit-btn" onClick={(e) => nextForm()}>
               Підтвердити &rarr;
@@ -114,24 +115,54 @@ const OrderPage = () => {
           </div>
           <div className="order-second-form col-lg-4">
             <p className="pib">2. Оплата та доставка</p>
-            <input
+            <select
+              className="input-order input-name order-select"
+              id="select-oplata"
+            >
+              <option
+                className="select-placeholder"
+                value="placeholder"
+                disabled
+                selected
+              >
+                Виберіть спосіб оплати*
+              </option>
+              <option value="Monobank">Monobank</option>
+              <option value="Privat">Privat Bank</option>
+            </select>
+            {/* <input
               className="input-order input-name"
               placeholder="Виберіть спосіб оплати*"
               id="input-oplata"
               required
-            ></input>
+            ></input> */}
             <input
               className="input-order input-phone"
               placeholder="Введіть місто*"
               required
               id="input-city"
             ></input>
-            <input
+            <select
+              className="input-order input-mail order-select"
+              id="select-post"
+            >
+              <option
+                className="select-placeholder"
+                value="placeholder"
+                disabled
+                selected
+              >
+                Виберіть пошту*
+              </option>
+              <option value="NovaPost">Нова Пошта</option>
+              <option value="UkrPost">Укр Пошта</option>
+            </select>
+            {/* <input
               className="input-order input-mail"
               placeholder="Введіть пошту*"
               required
               id="input-post"
-            ></input>
+            ></input> */}
             <input
               id="input-vidil"
               className="input-order input-phone"
@@ -145,13 +176,14 @@ const OrderPage = () => {
             ></input>
             <button
               className="order-submit-btn"
-              onClick={(e) => sendCart(properties.cart, properties.setCart)}
+              onClick={(e) => sendCart(properties.cart)}
             >
               Оформити &rarr;
             </button>
           </div>
         </div>
       </div>
+      <Modal setCart={properties.setCart}></Modal>
     </div>
   );
 };

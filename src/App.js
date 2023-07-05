@@ -107,10 +107,7 @@ function App() {
               path="/login/"
               element={<Login setToken={setToken}></Login>}
             ></Route>
-            <Route
-              path="/admin/*"
-              element={<ProtectedRoute component={AdminPanel} token={token} />}
-            ></Route>
+            <Route path="/admin/*" element={<AdminPanel></AdminPanel>}></Route>
           </Routes>
           <div
             className="changed-components"

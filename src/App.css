@@ -879,12 +879,17 @@ select {
   background-color: #fff;
   border: 1px solid #454545;
   padding: 2% 2%;
-  font-size: calc(var(--size) / 1.3);
+  font-size: calc(var(--size) / 1.5);
   margin-bottom: 3%;
 }
 .input-order::placeholder {
   font-size: calc(var(--size) / 1.5);
+  color: #000;
 }
+.select-placeholder {
+  font-size: calc(var(--size) / 1.5);
+}
+
 .order-submit-btn {
   background-color: #fff;
   border: 1px solid #454545;
@@ -1379,4 +1384,46 @@ body a:hover {
   place-items: center;
   padding: 0% 5%;
   padding-bottom: 5%;
+}
+#cart-success {
+  border-radius: 20px;
+  background: rgba(245, 245, 245, 0.6);
+  box-shadow: 0px 0px 25px 0px rgba(41, 41, 41, 0.5);
+  backdrop-filter: blur(3px);
+  border: 1px solid #fff;
+  padding: 3% 2%;
+  opacity: 0;
+  transition: all 0.5s;
+  display: block;
+  scale: 0;
+  position: absolute;
+}
+#cart-success[open] {
+  opacity: 1;
+  position: relative;
+  scale: 1;
+  transition: all 0.5s;
+  display: block;
+}
+.dialog-wrapper {
+  display: grid;
+  place-items: center;
+}
+.dialog-h {
+  font-size: calc(var(--size) / 1.2);
+  margin-bottom: 3%;
+}
+.dialog-close-btn {
+  background-color: #fff;
+  width: 50%;
+  border: 1px solid #797979;
+  border-radius: 7px;
+  font-size: calc(var(--size) / 1.4);
+  scale: 1;
+  transition: all 0.5s;
+}
+.dialog-close-btn:hover {
+  background-color: #000;
+  color: #fff;
+  transition: all 0.5s;
 }

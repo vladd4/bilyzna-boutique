@@ -8,9 +8,13 @@ async function addItem(bilyzna, setBilyzna) {
   let quant = document.querySelector("#item-quantity").value;
   let info = document.querySelector("#item-info").value;
   let size = document.querySelector("#item-size").value;
-  let img1 = document.querySelector("#item-img1").value;
-  let img2 = document.querySelector("#item-img2").value;
+  let img1 = document.querySelector("#item-img1").files[0];
+  let img2 = document.querySelector("#item-img2").files[0];
   let type = document.querySelector("#item-type").value;
+  let image1 = new FormData();
+  image1.append("image", img1);
+  let image2 = new FormData();
+  image2.append("image", img2);
   const formData = {
     name: name,
     brand: prod,
@@ -20,8 +24,8 @@ async function addItem(bilyzna, setBilyzna) {
     type: type,
     size: size,
     description: info,
-    image1: img1,
-    image2: img2,
+    image1: image1,
+    image2: image2,
   };
   await fetch("http://localhost:8080/admin/bra", {
     method: "POST",
@@ -43,8 +47,8 @@ async function addItem(bilyzna, setBilyzna) {
             type: type,
             size: size,
             description: info,
-            image1: img1,
-            image2: img2,
+            image1: image1,
+            image2: image2,
           },
         ]);
         document.querySelector("#item-art").value = "";
@@ -242,7 +246,7 @@ const AdminPanelView = ({ tovar, setTovar }) => {
               />
               <input
                 className="input-admin"
-                type="text"
+                type="file"
                 id="item-img1"
                 placeholder="Фото №1"
               />
@@ -250,7 +254,7 @@ const AdminPanelView = ({ tovar, setTovar }) => {
             <div className="col-lg-6">
               <input
                 className="input-admin"
-                type="text"
+                type="file"
                 id="item-img2"
                 placeholder="Фото №2"
               />

@@ -1,5 +1,5 @@
-// import Insta from "../imgs/instagram.png";
-// import Face from "../imgs/facebook.png";
+import Insta from "../imgs/inst.png";
+import Face from "../imgs/face.png";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -74,14 +74,14 @@ const Footer = () => {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <img className="fa fa-instagram" alt="" src=""></img>
+                    <img className="fa fa-instagram" alt="" src={Insta}></img>
                   </a>
                   <a
                     href="https://www.facebook.com/bilyzna.boutique/"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <img className="fa fa-twitter" alt="" src=""></img>
+                    <img className="fa fa-twitter" alt="" src={Face}></img>
                   </a>
                 </div>
               </div>

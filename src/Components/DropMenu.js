@@ -1,6 +1,6 @@
 import Logo from "../imgs/logo.png";
-// import Inst from "../imgs/instagram.png";
-// import Face from "../imgs/facebook.png";
+import Insta from "../imgs/drop_inst.png";
+import Face from "../imgs/drop_face.png";
 import { Link } from "react-router-dom";
 
 function showDrop(e) {
@@ -127,14 +127,14 @@ const DropMenu = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <img className="drop-icon-img" alt="" src=""></img>
+          <img className="drop-icon-img" alt="" src={Insta}></img>
         </a>
         <a
           href="https://www.facebook.com/bilyzna.boutique/"
           target="_blank"
           rel="noreferrer"
         >
-          <img className="drop-icon-img" alt="" src=""></img>
+          <img className="drop-icon-img" alt="" src={Face}></img>
         </a>
       </div>
     </div>

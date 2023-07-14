@@ -12,7 +12,7 @@ const Footer = () => {
     >
       <div className="container">
         <div className="row" id="foot-ps">
-          <div className="col-lg-4">
+          <div className="col-lg-4 col-sm-4">
             <h1 className="footer-block-h">Загальні питання</h1>
             <div className="foot-wrapper">
               <p className="footer-block-p foot-links">
@@ -45,7 +45,7 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <div className="col-lg-4">
+          <div className="col-lg-4 col-sm-4">
             <h1 className="footer-block-h">Графік обробки замовлень</h1>
             <div className="foot-wrapper">
               <p className="footer-block-p">Пн-Чт: 9:00 - 22:00</p>
@@ -53,7 +53,7 @@ const Footer = () => {
               <p className="footer-block-p">Нд: 10:00 - 18:00</p>
             </div>
           </div>
-          <div className="col-lg-4">
+          <div className="col-lg-4 col-sm-4">
             <h1 className="footer-block-h">Наші контакти</h1>
             <div className="foot-wrapper">
               <p className="footer-block-p foot-links">

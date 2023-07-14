@@ -15,6 +15,18 @@ const BreadCrumbs = () => {
       else if (crumb === "pants") crumb = "трусики";
       else if (crumb === "delivery") crumb = "доставка";
       else if (crumb === "return") crumb = "повернення";
+      else if (crumb === "robes") crumb = "халати";
+      else if (crumb === "nightwear") crumb = "нічні сорочки";
+      else if (crumb === "pijami") crumb = "піжами";
+      else if (crumb === "corrunderwear") crumb = "корегуюча білизна";
+      else if (crumb === "shirts") crumb = "майки";
+      else if (crumb === "manpijami") crumb = "чоловічі піжами";
+      else if (crumb === "manpants") crumb = "чоловічі труси";
+      else if (crumb === "manrobes") crumb = "халати";
+      else if (crumb === "swimwear") crumb = "купальники";
+      else if (crumb === "manswimwear") crumb = "пляжні шорти";
+      else if (crumb === "sale") crumb = "знижки";
+      else if (crumb === "news") crumb = "новинки";
       let crumbText = crumb.charAt(0).toUpperCase() + crumb.slice(1);
       crumbText = decodeURIComponent(crumbText.replace(/\+/g, " "));
       return (

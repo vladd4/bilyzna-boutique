@@ -58,6 +58,7 @@ const Header = ({ searchValue, setSearchValue }) => {
             >
               <img
                 className="header-social header-social-left"
+                alt="insta"
                 src={Insta}
               ></img>
             </a>
@@ -66,7 +67,7 @@ const Header = ({ searchValue, setSearchValue }) => {
               target="_blank"
               rel="noreferrer"
             >
-              <img className="header-social" src={Face}></img>
+              <img alt="facebook" className="header-social" src={Face}></img>
             </a>
           </p>
           <Link className="navbar-brand" to="/">
@@ -102,17 +103,12 @@ const Header = ({ searchValue, setSearchValue }) => {
       </nav>
       <div className="container-fluid links-row">
         <div className="drop-wrap">
-          <Link className="nav-link">Новинки</Link>
-          <ul className="drop-list">
-            <li className="drop-list-item">Бюсгалтера</li>
-            <li className="drop-list-item">Трусики</li>
-            <li className="drop-list-item">Піжами</li>
-            <li className="drop-list-item">Бюсти</li>
-            <li className="drop-list-item">Ночнушки</li>
-          </ul>
+          <Link className="nav-link" to="/news">
+            Новинки
+          </Link>
         </div>
         <div className="drop-wrap">
-          <Link className="nav-link">Білизна</Link>
+          <Link className="nav-link">Жіноча Білизна</Link>
           <ul className="drop-list">
             <li className="drop-list-item-li">
               <Link className="drop-list-item" to="/bras">
@@ -124,34 +120,74 @@ const Header = ({ searchValue, setSearchValue }) => {
                 Трусики
               </Link>
             </li>
-            <li className="drop-list-item">Піжами</li>
-            <li className="drop-list-item">Бюсти</li>
-            <li className="drop-list-item">Ночнушки</li>
-            <li className="drop-list-item">Носки</li>
-            <li className="drop-list-item">Плаття</li>
+            <li className="drop-list-item">
+              <Link className="drop-list-item" to="/pijami">
+                Піжами
+              </Link>
+            </li>
+            <li className="drop-list-item">
+              <Link className="drop-list-item" to="/robes">
+                Халати
+              </Link>
+            </li>
+            <li className="drop-list-item">
+              {" "}
+              <Link className="drop-list-item" to="/nightwear">
+                Нічні сорочки
+              </Link>
+            </li>
+            <li className="drop-list-item">
+              <Link className="drop-list-item" to="/corrunderwear">
+                Корегуюча білизна
+              </Link>
+            </li>
           </ul>
         </div>
-
-        <Link className="nav-link" to="/">
-          Жіночий одяг
-        </Link>
-
-        <Link className="nav-link" to="/pijami">
-          Піжами
-        </Link>
-        <Link className="nav-link" to="/">
-          Панчохи та носки
-        </Link>
-
-        <Link className="nav-link" to="/">
-          Для малят
-        </Link>
-
-        <Link className="nav-link" to="/">
-          Для чоловіків
-        </Link>
-
-        <Link className="nav-link" to="/">
+        <div className="drop-wrap">
+          <Link className="nav-link" to="/">
+            Для чоловіків
+          </Link>
+          <ul className="drop-list">
+            <li className="drop-list-item">
+              <Link className="drop-list-item" to="/manpants">
+                Труси
+              </Link>
+            </li>
+            <li className="drop-list-item">
+              <Link className="drop-list-item" to="/manpijami">
+                Піжами
+              </Link>
+            </li>
+            <li className="drop-list-item">
+              <Link className="drop-list-item" to="/manrobes">
+                Халати
+              </Link>
+            </li>
+            <li className="drop-list-item">
+              <Link className="drop-list-item" to="/shirts">
+                Майки
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className="drop-wrap">
+          <Link className="nav-link" to="/">
+            Купальники
+          </Link>
+          <ul className="drop-list">
+            <li className="drop-list-item">
+              <Link className="drop-list-item" to="/swimwear">
+                Жіночі
+              </Link>
+            </li>
+            <li className="drop-list-item">
+              <Link className="drop-list-item" to="/manswimwear">
+                Чоловічі
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <Link className="nav-link" to="/sale">
           Знижки
         </Link>
       </div>

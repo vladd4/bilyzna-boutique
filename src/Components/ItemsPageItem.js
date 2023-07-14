@@ -50,7 +50,10 @@ const ItemsPageItem = ({
         <div className="item-card-text">
           <h2 className="item-card-brand">{description}</h2>
           <h2 className="item-card-h">{title}</h2>
-          <p className="item-card-a">{price} ₴</p>
+          <div className="price-row">
+            <p className="item-card-a">{price} ₴</p>
+            <p className="item-card-a">&nbsp;&nbsp;</p>
+          </div>
         </div>
       </div>
     </Link>

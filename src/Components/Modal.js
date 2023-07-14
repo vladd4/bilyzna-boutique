@@ -9,7 +9,7 @@ const Modal = ({ setCart }) => {
           className="dialog-close-btn"
           onClick={(e) => {
             document.querySelector("#cart-success").close();
-            navigate("/");
+            navigate(-2);
             setCart([]);
           }}
         >

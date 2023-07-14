@@ -332,3 +332,56 @@ const AdminPanelView = ({ tovar, setTovar }) => {
   );
 };
 export default AdminPanelView;
+/*
+import React, { useState } from 'react';
+
+function App() {
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [name, setName] = useState('');
+    const [uploadStatus, setUploadStatus] = useState('');
+
+    const handleImageSelect = (event) => {
+        setSelectedImage(event.target.files[0]);
+    };
+
+    const handleNameChange = (event) => {
+        setName(event.target.value);
+    };
+
+    const handleImageUpload = () => {
+        if (selectedImage && name) {
+            const formData = new FormData();
+            formData.append('image', selectedImage);
+            formData.append('name', name);
+
+            fetch('http://localhost:8080/upload', {
+                method: 'POST',
+                body: formData,
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        setUploadStatus('Image uploaded successfully.');
+                    } else {
+                        throw new Error('Image upload failed.');
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                    setUploadStatus('Image upload failed.');
+                });
+        }
+    };
+
+    return (
+        <div>
+            <h1>Image Uploader</h1>
+            <input type="file" accept="image/*" onChange={handleImageSelect} />
+            <input type="text" placeholder="Name" value={name} onChange={handleNameChange} />
+            <button onClick={handleImageUpload}>Upload</button>
+            <p>{uploadStatus}</p>
+        </div>
+    );
+}
+
+export default App;
+*/

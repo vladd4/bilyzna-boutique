@@ -69,13 +69,13 @@ const LogosSlider = () => {
       <SwiperSlide>
         <div className="swiper-slide logo-slide">
           {" "}
-          <img className="logo-img" alt="" src={Slide7}></img>
+          <img id="slide-7" className="logo-img" alt="" src={Slide7}></img>
         </div>
       </SwiperSlide>
       <SwiperSlide>
         <div className="swiper-slide logo-slide">
           {" "}
-          <img className="logo-img gaia" alt="" src={Slide8}></img>
+          <img id="slide-8" className="logo-img gaia" alt="" src={Slide8}></img>
         </div>
       </SwiperSlide>
     </Swiper>

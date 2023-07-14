@@ -24,6 +24,11 @@ import Return from "./Components/Return";
 import Delivery from "./Components/Delivery";
 import Context from "./Hooks/Context";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import PijamiFiltr from "./Components/FiltrComponents/PijamiFiltr";
+import CorrFiltr from "./Components/FiltrComponents/CorrFiltr";
+import MpantsFiltr from "./Components/FiltrComponents/MpantsFiltr";
+import MpijamiFiltr from "./Components/FiltrComponents/MpijamiFiltr";
+import SaleFiltr from "./Components/FiltrComponents/SaleFiltr";
 
 async function getData(setProducts) {
   const response = await fetch(
@@ -175,8 +180,184 @@ function App() {
                       setProducts={setPijami}
                       setProd={setProd}
                       prod={prod}
-                      filtr={<PantsFiltr></PantsFiltr>}
+                      filtr={<PijamiFiltr></PijamiFiltr>}
                       base={"pijami"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/robes/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Халати"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<PijamiFiltr></PijamiFiltr>}
+                      base={"robes"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/nightwear/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Нічні сорочки"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<PijamiFiltr></PijamiFiltr>}
+                      base={"nightwear"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/corrunderwear/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Корегуюча білизна"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<CorrFiltr></CorrFiltr>}
+                      base={"corrunderwear"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/manpants/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Чоловічі труси"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<MpantsFiltr></MpantsFiltr>}
+                      base={"man pants"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/shirts/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Майки"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<MpantsFiltr></MpantsFiltr>}
+                      base={"shirts"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/manpijami/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Піжами"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<MpijamiFiltr></MpijamiFiltr>}
+                      base={"man pijami"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/manrobes/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Халати"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<MpijamiFiltr></MpijamiFiltr>}
+                      base={"man robes"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/swimwear/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Купальники"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<MpijamiFiltr></MpijamiFiltr>}
+                      base={"swimwear"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/manswimwear/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Пляжні шорти"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<MpijamiFiltr></MpijamiFiltr>}
+                      base={"man swimwear"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/news/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Новинки"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<SaleFiltr></SaleFiltr>}
+                      base={"news"}
+                    ></ItemsPage>
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/sale/*"
+                element={
+                  <>
+                    <ItemsPage
+                      products={products}
+                      title={"Знижки"}
+                      setProducts={setProducts}
+                      setProd={setProd}
+                      prod={prod}
+                      filtr={<SaleFiltr></SaleFiltr>}
+                      base={"sale"}
                     ></ItemsPage>
                   </>
                 }

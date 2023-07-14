@@ -37,9 +37,11 @@ function sendCart(cart) {
   const name = document.querySelector(".input-name").value;
   const tel = document.querySelector(".input-phone").value;
   const mail = document.querySelector(".input-mail").value;
-  const oplata = document.querySelector("#input-oplata").value;
+  const oplata_select = document.getElementById("select-oplata");
+  const oplata = oplata_select.value;
   const city = document.querySelector("#input-city").value;
-  const post = document.querySelector("#input-post").value;
+  const post_select = document.getElementById("select-post");
+  const post = post_select.value;
   const vidil = document.querySelector("#input-vidil").value;
   const comment = document.querySelector("#input-comment").value;
 
@@ -50,11 +52,11 @@ function sendCart(cart) {
   document.querySelector(".input-name").value = "";
   document.querySelector(".input-phone").value = "";
   document.querySelector(".input-mail").value = "";
-  document.querySelector("#input-oplata").value = "";
-  document.querySelector("#input-city").value = "";
-  document.querySelector("#input-post").value = "";
-  document.querySelector("#input-vidil").value = "";
-  document.querySelector("#input-comment").value = "";
+  // document.querySelector("#input-oplata").value = "";
+  // document.querySelector("#input-city").value = "";
+  // document.querySelector("#input-post").value = "";
+  // document.querySelector("#input-vidil").value = "";
+  // document.querySelector("#input-comment").value = "";
 
   document.querySelector(".order-main-form").style.display = "flex";
   document.querySelector(".order-second-form").style.display = "none";
@@ -130,12 +132,6 @@ const OrderPage = () => {
               <option value="Monobank">Monobank</option>
               <option value="Privat">Privat Bank</option>
             </select>
-            {/* <input
-              className="input-order input-name"
-              placeholder="Виберіть спосіб оплати*"
-              id="input-oplata"
-              required
-            ></input> */}
             <input
               className="input-order input-phone"
               placeholder="Введіть місто*"
@@ -157,12 +153,6 @@ const OrderPage = () => {
               <option value="NovaPost">Нова Пошта</option>
               <option value="UkrPost">Укр Пошта</option>
             </select>
-            {/* <input
-              className="input-order input-mail"
-              placeholder="Введіть пошту*"
-              required
-              id="input-post"
-            ></input> */}
             <input
               id="input-vidil"
               className="input-order input-phone"

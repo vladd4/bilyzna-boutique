@@ -44,8 +44,14 @@ const DropMenu = () => {
         <img className="drop-logo-img" alt="" src={Logo}></img>
       </div>
       <ul>
-        <li>
-          <button className="drop-li-btn">Новинки</button>
+        <li className="drop-li">
+          <div className="drop-li-wrap">
+            <button className="drop-li-btn" to="/sale">
+              <Link className="drop-li-btn" to="/news">
+                Новинки
+              </Link>
+            </button>
+          </div>
         </li>
         <li className="drop-li">
           <div className="drop-li-wrap">
@@ -55,7 +61,7 @@ const DropMenu = () => {
                 showDrop(e);
               }}
             >
-              Білизна{" "}
+              Жіноча білизна
             </button>
             <span onClick={(e) => hideDrop(e)} className="drop-close-span">
               &#8250;
@@ -68,8 +74,18 @@ const DropMenu = () => {
             <li>
               <Link to="/pants">Трусики</Link>
             </li>
-            <li>Піжами</li>
-            <li>Носки</li>
+            <li>
+              <Link to="/pijami">Піжами</Link>
+            </li>
+            <li>
+              <Link to="/robes">Халати</Link>
+            </li>
+            <li>
+              <Link to="/nightwear">Нічні сорочки</Link>
+            </li>
+            <li>
+              <Link to="/corrunderwear">Корегуюча білизна</Link>
+            </li>
           </div>
         </li>
         <li className="drop-li">
@@ -80,17 +96,25 @@ const DropMenu = () => {
                 showDrop(e);
               }}
             >
-              Піжами{" "}
+              Для чоловіків
             </button>
             <span onClick={(e) => hideDrop(e)} className="drop-close-span">
               &#8250;
             </span>
           </div>
           <div className="drop-menu-drop" id="drop2">
-            <li>Жіноча білизна</li>
-            <li>Трусики</li>
-            <li>Піжами</li>
-            <li>Носки</li>
+            <li>
+              <Link to="/manpants">Труси</Link>
+            </li>
+            <li>
+              <Link to="/manpijami">Піжами</Link>
+            </li>
+            <li>
+              <Link to="/manrobes">Халати</Link>
+            </li>
+            <li>
+              <Link to="/shirts">Майки</Link>
+            </li>
           </div>
         </li>
         <li className="drop-li">
@@ -101,25 +125,30 @@ const DropMenu = () => {
                 showDrop(e);
               }}
             >
-              Панчохи
+              Купальники
             </button>
             <span onClick={(e) => hideDrop(e)} className="drop-close-span">
               &#8250;
             </span>
           </div>
-          <div className="drop-menu-drop" id="drop3">
+          <div className="drop-menu-drop" id="drop2">
             <li>
-              <Link to="/bras">Бюстгалтери</Link>{" "}
+              <Link to="/swimwear">Жіночі</Link>
             </li>
             <li>
-              <Link to="/pants">Трусики</Link>
+              <Link to="/manswimwear">Чоловічі</Link>
             </li>
-            <li>Піжами</li>
-            <li>Носки</li>
           </div>
         </li>
-        <button className="drop-li-btn">Для чоловіків</button>
-        <button className="drop-li-btn">Для малят</button>
+        <li className="drop-li">
+          <div className="drop-li-wrap">
+            <button className="drop-li-btn" to="/sale">
+              <Link className="drop-li-btn" to="/sale">
+                Знижки
+              </Link>
+            </button>
+          </div>
+        </li>
       </ul>
       <div className="drop-icons-block">
         <a

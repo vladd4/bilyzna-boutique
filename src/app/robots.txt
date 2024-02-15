@@ -1,0 +1,29 @@
+User-agent: *
+Disallow: /login
+
+User-agent: *
+Disallow: /admin
+
+User-agent: *
+Disallow: /order
+
+User-agent: *
+Allow: /
+
+Sitemap: https://bilyzna-next.vercel.app/
+Sitemap: https://bilyzna-next.vercel.app/news
+Sitemap: https://bilyzna-next.vercel.app/bra
+Sitemap: https://bilyzna-next.vercel.app/womunderwear
+Sitemap: https://bilyzna-next.vercel.app/pijamas
+Sitemap: https://bilyzna-next.vercel.app/robe
+Sitemap: https://bilyzna-next.vercel.app/nightgowns
+Sitemap: https://bilyzna-next.vercel.app/corrunderwear
+Sitemap: https://bilyzna-next.vercel.app/manunderwear
+Sitemap: https://bilyzna-next.vercel.app/manpijamas
+Sitemap: https://bilyzna-next.vercel.app/manrobe
+Sitemap: https://bilyzna-next.vercel.app/manshirt
+Sitemap: https://bilyzna-next.vercel.app/womswimsuit
+Sitemap: https://bilyzna-next.vercel.app/manswimsuit
+Sitemap: https://bilyzna-next.vercel.app/sale
+Sitemap: https://bilyzna-next.vercel.app/delivery
+Sitemap: https://bilyzna-next.vercel.app/return

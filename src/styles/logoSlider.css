@@ -1,0 +1,30 @@
+.logo-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-slide img {
+  width: 75%;
+  height: 100%;
+}
+
+@media screen and (max-width: 450px) {
+  .swiper-pagination-bullet {
+    margin-top: 5px;
+  }
+}
+@media screen and (max-width: 600px) {
+  #logo-swiper .swiper-slide {
+    padding-bottom: 7%;
+  }
+  #logo-swiper {
+    margin: 7% 0%;
+  }
+  #main-swiper .swiper-pagination-bullet {
+    display: none !important;
+  }
+  .logo-slide img {
+    width: 100% !important;
+    height: 100%;
+  }
+}
